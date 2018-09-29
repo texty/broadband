@@ -36,13 +36,23 @@
       <file leaf-file-name="leaflet-quickstart.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/leaflet-quickstart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+            <state relative-caret-position="216">
+              <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
               <folding>
                 <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -114,6 +124,7 @@
         <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/js/barCodeChart.js" />
         <option value="$PROJECT_DIR$/leaflet-quickstart.html" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -295,12 +306,12 @@
       <workItem from="1537950450923" duration="14798000" />
       <workItem from="1538050149734" duration="3453000" />
       <workItem from="1538126377253" duration="11039000" />
-      <workItem from="1538222805846" duration="7531000" />
+      <workItem from="1538222805846" duration="8369000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189540000" />
+    <option name="totallyTimeSpent" value="190378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
@@ -340,13 +351,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/france.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5418">
-          <caret line="301" column="36" selection-start-line="301" selection-start-column="36" selection-end-line="308" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/L.PixiOverlay.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1008">
@@ -699,10 +703,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/leaflet-quickstart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        <state relative-caret-position="216">
+          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
           <folding>
             <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
