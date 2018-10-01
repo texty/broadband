@@ -71,7 +71,7 @@ var getJSON = function(url, successHandler, errorHandler) {
 document.addEventListener("DOMContentLoaded", function() {
     getJSON('data/data_geo_with_status.json', function (markers) {
 
-			markers.features = _.sampleSize(markers.features, 1000);
+			// markers.features = _.sampleSize(markers.features, 1000);
         // markers.features = marker.fus.features.filter(function(d) {return d.properties.name === "Харків місто"} )
 
         //var markerTexture = resources.marker.texture;
@@ -83,14 +83,39 @@ document.addEventListener("DOMContentLoaded", function() {
         //     maxZoom: 10
         // }).addTo(map);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     maxZoom: 18,
+        //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        // }).addTo(map);
+
+        // L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        //     subdomains: 'abcd',
+        //     maxZoom: 19
+        // }).addTo(map);
+        //
+        // var gl = L.mapboxGL({
+        //     accessToken: 'pk.eyJ1IjoiZHJpbWFjdXMxODIiLCJhIjoiWGQ5TFJuayJ9.6sQHpjf_UDLXtEsz8MnjXw',
+        //     maxZoom: 19,
+        //     style: 'data/internet.json'
+        // }).addTo(map);
+
+        var OpenMapSurfer_Grayscale = L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
             maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+
+        // var map = L.map('map');
+        // map.options.minZoom = 2;
+        // map.fitWorld();
 
 
         map.attributionControl.setPosition('bottomleft');
         map.zoomControl.setPosition('bottomright');
+
+
+        L.Control.geocoder().addTo(map);
+
         // map.setView([50.451141, 30.522684], 8);
         var pixiOverlay = (function () {
             var frame = null;
@@ -313,6 +338,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     // triangle.lineStyle(3 / scale, 0xffffff, 1);
                                     // triangle.beginFill(0xc20000, 1);
                                     color = 0xc20000;
+                                    // color = 0xf5fbf3;
                                     alpha = 0.6;
 
                                 }
@@ -320,6 +346,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     // triangle.lineStyle(3 / scale, 0xffffff, 1);
                                     // triangle.beginFill(0x0000ff, 1);
                                     color = 0x0000ff;
+                                    // color = 0xf3f7fb;
                                     alpha = 0.6;
                                 }
 
@@ -450,6 +477,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 autoPreventDefault: false
             });
         })();
+        debugger;
         pixiOverlay.addTo(map);
     });
 });

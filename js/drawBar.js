@@ -4,6 +4,15 @@
 
 function makeChart(data, margin, width, height, selected, intUserName) {
 
+
+    var namesDict = {'munic_int_speed': 'Органи місцевої влади',
+        'edu_int_speed': 'Заклади освіти',
+        'household_int_speed':'Користувачі',
+        'health_int_speed':'Лікарні',
+        'culture_int_speed':'Заклади культури'};
+
+    
+
     var result = data.map(a => Math.round(a[intUserName]))
 
     var pairs = {};
@@ -15,27 +24,65 @@ function makeChart(data, margin, width, height, selected, intUserName) {
 
     var result = Object.entries(pairs);
 
-    var selectedSpeed
+    var selectedSpeed;
 
     if (selected.length > 0) {
         selectedSpeed = selected[0][intUserName];
+
+        if (selectedSpeed === null) {
+
+        }
 
     }
     else {
         selectedSpeed = null
     }
 
-    var x = d3.scaleBand()
-            .rangeRound([0, width])
-            .padding(1),
-        y = d3.scaleLinear().rangeRound([height, 0]);
 
-    x.domain(result.map(function (d) {
-        return +d[0];
-    }));
+    // var x = d3.scaleBand()
+    //         .rangeRound([0, width])
+    //         .padding(1),
+    //     y = d3.scaleLinear().rangeRound([height, 0]);
+    //
+    // x.domain(result.map(function (d) {
+    //     return +d[0];
+    // }));
 
 
-    var svg = d3.select("#histo").append("svg")
+    // Ніфіга, якась помилка
+
+    if (selectedSpeed == null) {
+        d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text('');
+    }
+    else {
+        var speedOccurance = result.map(function(d) {return +d[0]} ).indexOf(Math.round(selectedSpeed));
+
+        var settmelts = result.slice(0, speedOccurance);
+
+        var number = 0;
+
+        settmelts.forEach(function(d) {
+            number += d[1]
+        });
+
+        var totalNumber = 0;
+
+        result.forEach(function(d) {
+            totalNumber += d[1]
+        });
+
+        // var possibleSpeeds = result.map(function(d) {return d[1]} ).sort(function(a, b){return a-b});
+        //
+        var percents= number/totalNumber * 100;
+
+        d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text(
+            // namesDict[intUserName] + ' '
+            Math.round(percents) + "%"
+        );
+    }
+
+
+    var svg = d3.select("#histo " + "#" + intUserName).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
@@ -60,12 +107,12 @@ function makeChart(data, margin, width, height, selected, intUserName) {
 
         })
         .attr("x", function (d) {
-            return x(+d[0]);
+            return +d[0];
         })
         .attr("y", 0)
         .attr("width", 1)
         .attr("height", function (d) {
-            return height - 50;
+            return height;
         })
         .style("opacity", function (d) {
             return d[1] / 1000
