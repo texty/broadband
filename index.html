@@ -10,7 +10,7 @@
 	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
 	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
 	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
-	<script src="http://rawgit.com/mapbox/mapbox-gl-leaflet/master/leaflet-mapbox-gl.js"></script>
+	<script src="js/leaflet-mapbox-gl.js"></script>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
@@ -46,24 +46,38 @@
 				<h3>Скільки відсотків міст мають нижчу середню швидкість інтернету за поточне? </h3>
 			</p></div>
 			<div id="histo">
-				<p>Користувачі</p>
-				<div class="tableRow" id="household_int_speed"></div>
-				<p>Органи влади</p>
-				<div class="tableRow" id="munic_int_speed"></div>
-				<p>Заклади освіти</p>
-				<div class="tableRow" id="edu_int_speed">	</div>
-				<p>Лікувальні заклади</p>
-				<div class="tableRow" id="health_int_speed"></div>
-				<p>Заклади культури</p>
-				<div class="tableRow" id="culture_int_speed"></div>
+				<div class="tableRow" id="household_int_speed">
+				</div>
+				<div class="tableRow" id="household_int_speed_second"></div>
+
+				<div class="tableRow" id="munic_int_speed">
+				</div>
+				<div class="tableRow" id="munic_int_speed_second"></div>
+
+				<div class="tableRow" id="edu_int_speed">
+				</div>
+				<div class="tableRow" id="edu_int_speed_second"></div>
+
+				<div class="tableRow" id="health_int_speed">
+				</div>
+				<div class="tableRow" id="health_int_speed_second"></div>
+
+				<div class="tableRow" id="culture_int_speed">
+				</div>
+				<div class="tableRow" id="culture_int_speed_second"></div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<div class="donut">
+
+</div>
+
 
 
 <style>
+
 
 	body {
 		background-color: #fbf8f3;
@@ -102,9 +116,6 @@
 		margin-bottom: 1rem;
 	}
 
-	.tableRow p {
-		width: 25%;
-	}
 
 	div#map {
 		height: 100%;

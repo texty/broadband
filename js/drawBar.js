@@ -39,20 +39,8 @@ function makeChart(data, margin, width, height, selected, intUserName) {
     }
 
 
-    // var x = d3.scaleBand()
-    //         .rangeRound([0, width])
-    //         .padding(1),
-    //     y = d3.scaleLinear().rangeRound([height, 0]);
-    //
-    // x.domain(result.map(function (d) {
-    //     return +d[0];
-    // }));
-
-
-    // Ніфіга, якась помилка
-
     if (selectedSpeed == null) {
-        d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text('');
+        // d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text('');
     }
     else {
         var speedOccurance = result.map(function(d) {return +d[0]} ).indexOf(Math.round(selectedSpeed));
@@ -75,14 +63,20 @@ function makeChart(data, margin, width, height, selected, intUserName) {
         //
         var percents= number/totalNumber * 100;
 
-        d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text(
-            // namesDict[intUserName] + ' '
-            Math.round(percents) + "%"
-        );
+        // d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text(
+        //     // namesDict[intUserName] + ' '
+        //     Math.round(percents) + "%"
+        // );
+
+
+        donutChart(Math.round(percents),intUserName);
+        d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text('' + namesDict[intUserName]);
+
+
     }
 
 
-    var svg = d3.select("#histo " + "#" + intUserName).append("svg")
+    var svg = d3.select("#histo " + "#" + intUserName + '_second').append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
@@ -117,5 +111,67 @@ function makeChart(data, margin, width, height, selected, intUserName) {
         .style("opacity", function (d) {
             return d[1] / 1000
         });
+
+
+
+    function donutChart(d, intUserName) {
+        var data = [
+            {name: 'cats', count: d, percentage: d, color: '#0000ff'},
+            {name: 'dogs', count: 100-d, percentage: 100-d, color: '#fbf8f3'}
+        ];
+        var totalCount = d;		//calcuting total manually
+
+        var width = 50,
+            height = 50,
+            radius = 20;
+
+        var arc = d3.arc()
+            .outerRadius(radius - 5)
+            .innerRadius(10);
+
+        var pie = d3.pie()
+            .sort(null)
+            .value(function(d) {
+                return d.count;
+            });
+
+        var svg = d3.select("#histo " + "#" + intUserName).append('svg')
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var g = svg.selectAll(".arc")
+            .data(pie(data))
+            .enter().append("g");
+
+        g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d,i) {
+                return d.data.color;
+            });
+
+        // g.append("text")
+        //     .attr("transform", function(d) {
+        //         var _d = arc.centroid(d);
+        //         _d[0] *= 1.5;	//multiply by a constant factor
+        //         _d[1] *= 1.5;	//multiply by a constant factor
+        //         return "translate(" + _d + ")";
+        //     })
+        //     .attr("dy", ".50em")
+        //     .style("text-anchor", "middle")
+        //     .text(function(d) {
+        //         if(d.data.percentage < 8) {
+        //             return '';
+        //         }
+        //         return d.data.percentage + '%';
+        //     });
+
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr('font-size', '0.5em')
+            .attr('y', 1)
+            .text(totalCount + "%");
+    }
 
 }

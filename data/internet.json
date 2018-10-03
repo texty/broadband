@@ -1467,7 +1467,7 @@
       "layout": {
         "line-cap": "round",
         "line-join": "round",
-        "visibility": "visible"
+        "visibility": "none"
       },
       "paint": {
         "line-color": "rgba(207, 207, 207, 1)",
@@ -1619,7 +1619,7 @@
           "Noto Sans Regular"
         ],
         "text-justify": "center",
-        "visibility": "visible",
+        "visibility": "none",
         "text-offset": [
           0.5,
           0
@@ -1664,7 +1664,7 @@
           "Noto Sans Regular"
         ],
         "text-justify": "left",
-        "visibility": "visible",
+        "visibility": "none",
         "text-offset": [
           0.5,
           0.2
@@ -1724,7 +1724,7 @@
           "Noto Sans Regular"
         ],
         "text-justify": "left",
-        "visibility": "visible",
+        "visibility": "none",
         "text-offset": [
           0.5,
           0.2
@@ -1809,7 +1809,7 @@
           "Noto Sans Regular"
         ],
         "text-justify": "left",
-        "visibility": "visible",
+        "visibility": "none",
         "text-offset": [
           0.5,
           0.2

@@ -2,45 +2,45 @@
 //  * Created by ptrbdr on 17.09.18.
 //  */
 // patch WebGL PIXI.mesh.MeshRenderer
-// var _pixiGlCore2 = PIXI.glCore;
-// PIXI.mesh.MeshRenderer.prototype.onContextChange = function onContextChange() {
-//     var gl = this.renderer.gl;
-//
-//     this.shader = new PIXI.Shader(gl, 'attribute vec2 aVertexPosition;\n\nuniform mat3 projectionMatrix;\nuniform mat3 translationMatrix;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n}\n', 'uniform vec4 uColor;\n\nvoid main(void)\n{\n    gl_FragColor = uColor;\n}\n');
-// };
-//
-// PIXI.mesh.MeshRenderer.prototype.render = function render(mesh) {
-//     var renderer = this.renderer;
-//     var gl = renderer.gl;
-//     var glData = mesh._glDatas[renderer.CONTEXT_UID];
-//
-//     if (!glData) {
-//         renderer.bindVao(null);
-//
-//         glData = {
-//             shader: this.shader,
-//             vertexBuffer: _pixiGlCore2.GLBuffer.createVertexBuffer(gl, mesh.vertices, gl.STREAM_DRAW),
-//             indexBuffer: _pixiGlCore2.GLBuffer.createIndexBuffer(gl, mesh.indices, gl.STATIC_DRAW)
-//         };
-//
-//         // build the vao object that will render..
-//         glData.vao = new _pixiGlCore2.VertexArrayObject(gl)
-//             .addIndex(glData.indexBuffer)
-//             .addAttribute(glData.vertexBuffer, glData.shader.attributes.aVertexPosition, gl.FLOAT, false, 2 * 4, 0);
-//
-//         mesh._glDatas[renderer.CONTEXT_UID] = glData;
-//     }
-//
-//     renderer.bindVao(glData.vao);
-//
-//     renderer.bindShader(glData.shader);
-//
-//     glData.shader.uniforms.translationMatrix = mesh.worldTransform.toArray(true);
-//
-//     glData.shader.uniforms.uColor = PIXI.utils.premultiplyRgba(mesh.tintRgb, mesh.worldAlpha, glData.shader.uniforms.uColor);
-//
-//     glData.vao.draw(gl.TRIANGLE_STRIP, mesh.indices.length, 0);
-// };
+var _pixiGlCore2 = PIXI.glCore;
+PIXI.mesh.MeshRenderer.prototype.onContextChange = function onContextChange() {
+    var gl = this.renderer.gl;
+
+    this.shader = new PIXI.Shader(gl, 'attribute vec2 aVertexPosition;\n\nuniform mat3 projectionMatrix;\nuniform mat3 translationMatrix;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n}\n', 'uniform vec4 uColor;\n\nvoid main(void)\n{\n    gl_FragColor = uColor;\n}\n');
+};
+
+PIXI.mesh.MeshRenderer.prototype.render = function render(mesh) {
+    var renderer = this.renderer;
+    var gl = renderer.gl;
+    var glData = mesh._glDatas[renderer.CONTEXT_UID];
+
+    if (!glData) {
+        renderer.bindVao(null);
+
+        glData = {
+            shader: this.shader,
+            vertexBuffer: _pixiGlCore2.GLBuffer.createVertexBuffer(gl, mesh.vertices, gl.STREAM_DRAW),
+            indexBuffer: _pixiGlCore2.GLBuffer.createIndexBuffer(gl, mesh.indices, gl.STATIC_DRAW)
+        };
+
+        // build the vao object that will render..
+        glData.vao = new _pixiGlCore2.VertexArrayObject(gl)
+            .addIndex(glData.indexBuffer)
+            .addAttribute(glData.vertexBuffer, glData.shader.attributes.aVertexPosition, gl.FLOAT, false, 2 * 4, 0);
+
+        mesh._glDatas[renderer.CONTEXT_UID] = glData;
+    }
+
+    renderer.bindVao(glData.vao);
+
+    renderer.bindShader(glData.shader);
+
+    glData.shader.uniforms.translationMatrix = mesh.worldTransform.toArray(true);
+
+    glData.shader.uniforms.uColor = PIXI.utils.premultiplyRgba(mesh.tintRgb, mesh.worldAlpha, glData.shader.uniforms.uColor);
+
+    glData.vao.draw(gl.TRIANGLE_STRIP, mesh.indices.length, 0);
+};
 
 
 var getJSON = function(url, successHandler, errorHandler) {
@@ -93,21 +93,16 @@ document.addEventListener("DOMContentLoaded", function() {
         //     subdomains: 'abcd',
         //     maxZoom: 19
         // }).addTo(map);
-        //
-        // var gl = L.mapboxGL({
-        //     accessToken: 'pk.eyJ1IjoiZHJpbWFjdXMxODIiLCJhIjoiWGQ5TFJuayJ9.6sQHpjf_UDLXtEsz8MnjXw',
-        //     maxZoom: 19,
-        //     style: 'data/internet.json'
-        // }).addTo(map);
 
-        var OpenMapSurfer_Grayscale = L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
+        var gl = L.mapboxGL({
+            accessToken: 'pk.eyJ1IjoiZHJpbWFjdXMxODIiLCJhIjoiWGQ5TFJuayJ9.6sQHpjf_UDLXtEsz8MnjXw',
             maxZoom: 19,
-            attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            style: 'data/internet.json'
+            // style: 'data/labels.json',
+            // pane: 'tilePane'
         }).addTo(map);
 
-        // var map = L.map('map');
-        // map.options.minZoom = 2;
-        // map.fitWorld();
+        window.gl = gl;
 
 
         map.attributionControl.setPosition('bottomleft');
@@ -125,7 +120,8 @@ document.addEventListener("DOMContentLoaded", function() {
             var tree = rbush();
 
 
-            var pixiContainer = new PIXI.Container();
+            var pixiContainer = new PIXI.Graphics();
+
             pixiContainer.interactive = true;
             pixiContainer.buttonMode = true;
 
@@ -136,9 +132,6 @@ document.addEventListener("DOMContentLoaded", function() {
             // map.on('zoomend', function() {
             //     debugger;
             // });
-
-
-
 
             var doubleBuffering = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
@@ -165,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //					}
 
                 var zoom = utils.getMap().getZoom();
-                var container = utils.getContainer();
+                var triangle = utils.getContainer();
                 var renderer = utils.getRenderer();
                 var project = utils.latLngToLayerPoint;
                 var scale = utils.getScale();
@@ -331,12 +324,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         markers.features.forEach(function (projectedPolygon) {
 
-                            var triangle = new PIXI.Graphics();
+                            // var triangle = new PIXI.Graphics();
 
                             var color, alpha
                                 if (projectedPolygon.properties.status == "true") {
                                     // triangle.lineStyle(3 / scale, 0xffffff, 1);
-                                    // triangle.beginFill(0xc20000, 1);
+                                    // triangle.begFinFill(0xc20000, 1);
                                     color = 0xc20000;
                                     // color = 0xf5fbf3;
                                     alpha = 0.6;
@@ -352,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
                                 if (projectedPolygon.geometry.coordinates[0].length <= 1) {
-                                    triangle.clear();
+                                    // triangle.clear();
                                     // triangle.lineStyle( 0x3388ff, 1);
                                     triangle.beginFill(color, alpha);
                                     projectedPolygon.geometry.coordinates[0][0].forEach(function(coords, index) {
@@ -361,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     });
                                     triangle.endFill();
 
-                                    pixiContainer.addChild(triangle);
+                                    // pixiContainer.addChild(triangle);
                                 }
                                 else {
                                     projectedPolygon.geometry.coordinates.forEach(function (pol) {
@@ -376,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                             if (index == 0) triangle.moveTo(coords.x, coords.y);
                                             else triangle.lineTo(coords.x, coords.y);
                                             triangle.endFill();
-                                            pixiContainer.addChild(triangle);
+                                            // pixiContainer.addChild(triangle);
                                         });
                                         // triangle.endFill();
                                     })
@@ -469,7 +462,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 firstDraw = false;
                 prevZoom = zoom;
-                renderer.render(container);
+
+                window.triangle = triangle;
+                renderer.render(triangle);
 
 
             }, pixiContainer, {
@@ -477,8 +472,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 autoPreventDefault: false
             });
         })();
-        debugger;
         pixiOverlay.addTo(map);
+
+        var gl2 = L.mapboxGL({
+            accessToken: 'pk.eyJ1IjoiZHJpbWFjdXMxODIiLCJhIjoiWGQ5TFJuayJ9.6sQHpjf_UDLXtEsz8MnjXw',
+            maxZoom: 19,
+            // style: 'data/internet.json',
+            style: 'data/labels.json',
+            pane: 'overlayPane'
+        }).addTo(map);
+
+        window.gl2 = gl2;
     });
 });
 
