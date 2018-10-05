@@ -2,45 +2,45 @@
 //  * Created by ptrbdr on 17.09.18.
 //  */
 // patch WebGL PIXI.mesh.MeshRenderer
-var _pixiGlCore2 = PIXI.glCore;
-PIXI.mesh.MeshRenderer.prototype.onContextChange = function onContextChange() {
-    var gl = this.renderer.gl;
+// var _pixiGlCore2 = PIXI.glCore;
+// PIXI.mesh.MeshRenderer.prototype.onContextChange = function onContextChange() {
+//     var gl = this.renderer.gl;
+//
+//     this.shader = new PIXI.Shader(gl, 'attribute vec2 aVertexPosition;\n\nuniform mat3 projectionMatrix;\nuniform mat3 translationMatrix;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n}\n', 'uniform vec4 uColor;\n\nvoid main(void)\n{\n    gl_FragColor = uColor;\n}\n');
+// };
 
-    this.shader = new PIXI.Shader(gl, 'attribute vec2 aVertexPosition;\n\nuniform mat3 projectionMatrix;\nuniform mat3 translationMatrix;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n}\n', 'uniform vec4 uColor;\n\nvoid main(void)\n{\n    gl_FragColor = uColor;\n}\n');
-};
-
-PIXI.mesh.MeshRenderer.prototype.render = function render(mesh) {
-    var renderer = this.renderer;
-    var gl = renderer.gl;
-    var glData = mesh._glDatas[renderer.CONTEXT_UID];
-
-    if (!glData) {
-        renderer.bindVao(null);
-
-        glData = {
-            shader: this.shader,
-            vertexBuffer: _pixiGlCore2.GLBuffer.createVertexBuffer(gl, mesh.vertices, gl.STREAM_DRAW),
-            indexBuffer: _pixiGlCore2.GLBuffer.createIndexBuffer(gl, mesh.indices, gl.STATIC_DRAW)
-        };
-
-        // build the vao object that will render..
-        glData.vao = new _pixiGlCore2.VertexArrayObject(gl)
-            .addIndex(glData.indexBuffer)
-            .addAttribute(glData.vertexBuffer, glData.shader.attributes.aVertexPosition, gl.FLOAT, false, 2 * 4, 0);
-
-        mesh._glDatas[renderer.CONTEXT_UID] = glData;
-    }
-
-    renderer.bindVao(glData.vao);
-
-    renderer.bindShader(glData.shader);
-
-    glData.shader.uniforms.translationMatrix = mesh.worldTransform.toArray(true);
-
-    glData.shader.uniforms.uColor = PIXI.utils.premultiplyRgba(mesh.tintRgb, mesh.worldAlpha, glData.shader.uniforms.uColor);
-
-    glData.vao.draw(gl.TRIANGLE_STRIP, mesh.indices.length, 0);
-};
+// PIXI.mesh.MeshRenderer.prototype.render = function render(mesh) {
+//     var renderer = this.renderer;
+//     var gl = renderer.gl;
+//     var glData = mesh._glDatas[renderer.CONTEXT_UID];
+//
+//     if (!glData) {
+//         renderer.bindVao(null);
+//
+//         glData = {
+//             shader: this.shader,
+//             vertexBuffer: _pixiGlCore2.GLBuffer.createVertexBuffer(gl, mesh.vertices, gl.STREAM_DRAW),
+//             indexBuffer: _pixiGlCore2.GLBuffer.createIndexBuffer(gl, mesh.indices, gl.STATIC_DRAW)
+//         };
+//
+//         // build the vao object that will render..
+//         glData.vao = new _pixiGlCore2.VertexArrayObject(gl)
+//             .addIndex(glData.indexBuffer)
+//             .addAttribute(glData.vertexBuffer, glData.shader.attributes.aVertexPosition, gl.FLOAT, false, 2 * 4, 0);
+//
+//         mesh._glDatas[renderer.CONTEXT_UID] = glData;
+//     }
+//
+//     renderer.bindVao(glData.vao);
+//
+//     renderer.bindShader(glData.shader);
+//
+//     glData.shader.uniforms.translationMatrix = mesh.worldTransform.toArray(true);
+//
+//     glData.shader.uniforms.uColor = PIXI.utils.premultiplyRgba(mesh.tintRgb, mesh.worldAlpha, glData.shader.uniforms.uColor);
+//
+//     glData.vao.draw(gl.TRIANGLE_STRIP, mesh.indices.length, 0);
+// };
 
 
 var getJSON = function(url, successHandler, errorHandler) {
@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         //var markerTexture = resources.marker.texture;
         var map = L.map('map').setView([50.451141, 30.522684], 8);
+
         // L.tileLayer('//stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
         //     subdomains: 'abcd',
         //     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
@@ -116,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var frame = null;
             var firstDraw = true;
             var prevZoom;
+            var selectedKOATUU;
 
             var tree = rbush();
 
@@ -152,10 +154,6 @@ document.addEventListener("DOMContentLoaded", function() {
             var focus = null;
 
             return L.pixiOverlay(function (utils) {
-//					if (frame) {
-//						cancelAnimationFrame(frame);
-//						frame = null;
-//					}
 
                 var zoom = utils.getMap().getZoom();
                 var triangle = utils.getContainer();
@@ -164,8 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 var scale = utils.getScale();
 
 
-
-
+                //here map was drawn
                 if (firstDraw) {
                     (function() {
 
@@ -390,22 +387,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 maxY: point.y
                             });
 
-                            return features[0].feature
+                            return features[0].feature;
 
-                            // for (var i = 0; i < features.length; i++) {
-                            //     var feat = features[i].feature;
-                            //     return feat
-//									 ТУТ БУЛА ПЕРЕВІРЯЛКА, АЛЕ ВОНА ДЛЯ МЕНЕ НЕ ДУЖЕ ПОТРІБНА
-//                                 if (feat.geometry.type === 'Polygon') {
-//                                     if ((feat.geometry.coordinates, point)) return feat;
-//                                 } else {
-//                                     for (var j = 0; j < feat.geometry.coordinates.length; j++) {
-//                                         var ring = feat.geometry.coordinates[j][0].map(function(d) { return d} );
-// //											Хуйня відбувається тут
-//                                         if (containsPoint(ring, point)) return feat;
-//                                     }
-//                                 }
-//                             }
+
                         }
                         function focusFeature(feat) {
 								if (focus) focus.removeFrom(utils.getMap());
@@ -426,23 +410,11 @@ document.addEventListener("DOMContentLoaded", function() {
 											interactive: false
 										});
 
-                                    chartCode.func(feat);
+                                    // chartCode.func(feat);
+
+                                    smallChartBarcode(map.getBounds(), feat);
                                     focus.addTo(utils.getMap());
-//										var dpt = feat.properties.ref.substring(0, 3);
-//										getJSON('data/leg-t1/' + dpt + '/' + feat.properties.ref + feat.properties.city + '.json', function(data) {
-//											var merged = barbiche('details').merge({
-//												nuance2color: nuance2color,
-//												getRatio: function(a, b) {return Math.round(a * 10000 / b) / 100;},
-//												fill: function(str) {
-//													if (str.length < 6) {
-//														return (new Array(6 - str.length + 1)).join('0') + str;
-//													} else return str;
-//												}
-//											}, data);
-//											legendContent.innerHTML = '';
-//											legendContent.appendChild(merged);
-//											L.DomUtil.removeClass(legend, 'hide');
-//										});
+//
                                 } else {
                                     focus = null;
 //										L.DomUtil.addClass(legend, 'hide');
@@ -457,13 +429,61 @@ document.addEventListener("DOMContentLoaded", function() {
                             focusFeature(feat);
                         });
 
+                        function smallChartBarcode(feat, selection) {
+
+                            getJSON('data/broadband.json', function(data) {
+
+
+                                data.forEach(function(d) {
+                                    if (selection != null) {
+                                        d3.selectAll('#histo .tableRow *').remove();
+                                        selectedKOATUU = data.filter(function(d) {return d.koatuu == +selection.koatuu} )[0];
+                                    }
+                                    else {
+                                        d3.selectAll('#histo .tableRow *').remove();
+                                    //     selectedKOATUU = null;
+                                    }
+                                });
+
+
+                                var boundCoordinates = [[project(Object.values(feat)[0])],[project(Object.values(feat)[1])]];
+                                var boundCities = tree.search({
+                                    minX: boundCoordinates[0][0].x,
+                                    minY: boundCoordinates[1][0].y,
+                                    maxX: boundCoordinates[1][0].x,
+                                    maxY: boundCoordinates[0][0].y
+                                });
+
+                                var boundKOATUU = boundCities.map(function(d) {return d.feature.koatuu } );
+
+                                var dataFiltered = data.filter(f => boundKOATUU.includes(f.koatuu));
+
+                                var margin = {top: 1, right: 1, bottom: 1, left: 1},
+                                    width = 150 - margin.left - margin.right,
+                                    height = 20 - margin.top - margin.bottom;
+
+                                makeChart(dataFiltered, margin, width, height, selectedKOATUU, 'munic_int_speed');
+                                makeChart(dataFiltered, margin, width, height, selectedKOATUU, 'household_int_speed');
+                                makeChart(dataFiltered, margin, width, height, selectedKOATUU, 'edu_int_speed');
+                                makeChart(dataFiltered, margin, width, height, selectedKOATUU, 'health_int_speed');
+                                makeChart(dataFiltered, margin, width, height, selectedKOATUU, 'culture_int_speed');
+
+                            });
+
+                        }
+
+                        smallChartBarcode(map.getBounds(), null);
+                        map.on('moveend', function() {
+                            smallChartBarcode(map.getBounds(), null);
+                        });
+
+
                         totalData = null;
                     })();
                 }
                 firstDraw = false;
                 prevZoom = zoom;
 
-                window.triangle = triangle;
                 renderer.render(triangle);
 
 
@@ -474,6 +494,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })();
         pixiOverlay.addTo(map);
 
+
         var gl2 = L.mapboxGL({
             accessToken: 'pk.eyJ1IjoiZHJpbWFjdXMxODIiLCJhIjoiWGQ5TFJuayJ9.6sQHpjf_UDLXtEsz8MnjXw',
             maxZoom: 19,
@@ -482,9 +503,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pane: 'overlayPane'
         }).addTo(map);
 
-        window.gl2 = gl2;
+
+
     });
 });
-
-
-chartCode.func("first");

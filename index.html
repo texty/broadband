@@ -27,9 +27,9 @@
 	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
 
-	<script src="js/barCodeChart.js"></script>
-	<script src="js/main.js"></script>
+	<!--<script src="js/barCodeChart.js"></script>-->
 	<script src="js/drawBar.js"></script>
+	<script src="js/main.js"></script>
 	<script src="js/smallChart.js"></script>
 	<script src="js/smallChartTolik.js"></script>
 
@@ -139,10 +139,13 @@
 	}
 	.bar {
 		fill: steelblue;
+		opacity: 0.6;
+		z-index: 0.6;
 	}
 	.barSelected {
 		fill:red;
 		opacity: 1 !important;
+		z-index: 10;
 	}
 </style>
 

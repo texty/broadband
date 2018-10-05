@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44a8402c-a890-4689-9124-355a1325d3fc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/donutChart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/labels.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/leaflet-mapbox-gl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/internet.json" afterPath="$PROJECT_DIR$/data/internet.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/barCodeChart.js" afterPath="$PROJECT_DIR$/js/barCodeChart.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/drawBar.js" afterPath="$PROJECT_DIR$/js/drawBar.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
     </list>
@@ -45,114 +44,36 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="14" column="84" selection-start-line="14" selection-start-column="84" selection-end-line="14" selection-end-column="84" />
+            <state relative-caret-position="1771">
+              <caret line="147" column="19" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
               <folding>
-                <marker date="1538479349637" expanded="true" signature="3563:3653" placeholder="..." />
+                <marker date="1538755649654" expanded="true" signature="3570:3660" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="74" column="62" selection-start-line="74" selection-start-column="62" selection-end-line="74" selection-end-column="62" />
+            <state relative-caret-position="203">
+              <caret line="439" column="124" selection-start-line="439" selection-start-column="124" selection-end-line="439" selection-end-column="124" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1538571532362" expanded="true" signature="3674:4034" placeholder="..." />
-                <marker date="1538571532362" expanded="true" signature="6209:6821" placeholder="..." />
+                <element signature="e#608#676#0" expanded="false" />
+                <element signature="e#1939#2518#0" expanded="false" />
+                <marker date="1538755851228" expanded="true" signature="3779:4139" placeholder="..." />
+                <marker date="1538755851228" expanded="true" signature="6293:6905" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="internet.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/internet.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1314">
-              <caret line="1453" column="4" selection-start-line="1453" selection-start-column="4" selection-end-line="1453" selection-end-column="4" />
-              <folding>
-                <element signature="e#1086#1266#0" expanded="false" />
-                <element signature="e#1272#1583#0" expanded="false" />
-                <element signature="e#1589#1941#0" expanded="false" />
-                <element signature="e#1947#2449#0" expanded="false" />
-                <element signature="e#2455#3140#0" expanded="false" />
-                <element signature="e#3146#3837#0" expanded="false" />
-                <element signature="e#3843#4517#0" expanded="false" />
-                <element signature="e#4523#4845#0" expanded="false" />
-                <element signature="e#4851#5576#0" expanded="false" />
-                <element signature="e#5582#5930#0" expanded="false" />
-                <element signature="e#5936#7003#0" expanded="false" />
-                <element signature="e#7009#8047#0" expanded="false" />
-                <element signature="e#8053#8817#0" expanded="false" />
-                <element signature="e#8823#9589#0" expanded="false" />
-                <element signature="e#9595#10368#0" expanded="false" />
-                <element signature="e#10374#11219#0" expanded="false" />
-                <element signature="e#11225#12064#0" expanded="false" />
-                <element signature="e#12070#12971#0" expanded="false" />
-                <element signature="e#12977#13947#0" expanded="false" />
-                <element signature="e#13953#14844#0" expanded="false" />
-                <element signature="e#14850#15568#0" expanded="false" />
-                <element signature="e#15574#16729#0" expanded="false" />
-                <element signature="e#16735#17997#0" expanded="false" />
-                <element signature="e#18003#18851#0" expanded="false" />
-                <element signature="e#18857#19597#0" expanded="false" />
-                <element signature="e#19603#20416#0" expanded="false" />
-                <element signature="e#20422#21137#0" expanded="false" />
-                <element signature="e#21143#21876#0" expanded="false" />
-                <element signature="e#21882#22781#0" expanded="false" />
-                <element signature="e#22787#23759#0" expanded="false" />
-                <element signature="e#23765#24904#0" expanded="false" />
-                <element signature="e#24910#26156#0" expanded="false" />
-                <element signature="e#26162#27254#0" expanded="false" />
-                <element signature="e#27260#28292#0" expanded="false" />
-                <element signature="e#28298#29105#0" expanded="false" />
-                <element signature="e#29111#30047#0" expanded="false" />
-                <element signature="e#30053#31129#0" expanded="false" />
-                <element signature="e#31135#32131#0" expanded="false" />
-                <element signature="e#32137#33188#0" expanded="false" />
-                <element signature="e#33194#34656#0" expanded="false" />
-                <element signature="e#34662#36327#0" expanded="false" />
-                <element signature="e#36333#37924#0" expanded="false" />
-                <element signature="e#37930#39605#0" expanded="false" />
-                <element signature="e#39611#40478#0" expanded="false" />
-                <element signature="e#40484#41774#0" expanded="false" />
-                <element signature="e#41780#43133#0" expanded="false" />
-                <element signature="e#43139#44590#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="labels.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/labels.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="32" column="23" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="80" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="barCodeChart.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/barCodeChart.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#41#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="drawBar.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="drawBar.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/drawBar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1260">
-              <caret line="72" column="117" selection-start-line="72" selection-start-column="117" selection-end-line="72" selection-end-column="117" />
+            <state relative-caret-position="270">
+              <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
               <folding>
                 <element signature="n#!!doc;n#makeChart#0" expanded="false" />
               </folding>
@@ -191,15 +112,15 @@
         <option value="$PROJECT_DIR$/france.html" />
         <option value="$PROJECT_DIR$/leaflet-quickstart.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/js/barCodeChart.js" />
         <option value="$PROJECT_DIR$/js/leaflet-mapbox-gl.js" />
         <option value="$PROJECT_DIR$/data/internet.json" />
         <option value="$PROJECT_DIR$/data/labels.json" />
         <option value="$PROJECT_DIR$/js/donutChart.js" />
         <option value="$PROJECT_DIR$/data/donutChart.js" />
-        <option value="$PROJECT_DIR$/js/drawBar.js" />
+        <option value="$PROJECT_DIR$/js/barCodeChart.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/main.js" />
+        <option value="$PROJECT_DIR$/js/drawBar.js" />
       </list>
     </option>
   </component>
@@ -240,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -258,10 +180,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,6 +206,10 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/leaflet-quickstart.html" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="JavaScriptPreferStrict" value="false" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -374,12 +313,14 @@
       <workItem from="1538326202407" duration="6398000" />
       <workItem from="1538342859821" duration="3436000" />
       <workItem from="1538384803018" duration="29264000" />
-      <workItem from="1538558456108" duration="6456000" />
+      <workItem from="1538558456108" duration="7664000" />
+      <workItem from="1538649330094" duration="12087000" />
+      <workItem from="1538728874103" duration="14968000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="243651000" />
+    <option name="totallyTimeSpent" value="271914000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
@@ -399,7 +340,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -415,7 +356,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -609,7 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-216">
           <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -630,59 +572,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/internet.json">
+    <entry file="file://$PROJECT_DIR$/L.PixiOverlay.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="1453" column="4" selection-start-line="1453" selection-start-column="4" selection-end-line="1453" selection-end-column="4" />
-          <folding>
-            <element signature="e#1086#1266#0" expanded="false" />
-            <element signature="e#1272#1583#0" expanded="false" />
-            <element signature="e#1589#1941#0" expanded="false" />
-            <element signature="e#1947#2449#0" expanded="false" />
-            <element signature="e#2455#3140#0" expanded="false" />
-            <element signature="e#3146#3837#0" expanded="false" />
-            <element signature="e#3843#4517#0" expanded="false" />
-            <element signature="e#4523#4845#0" expanded="false" />
-            <element signature="e#4851#5576#0" expanded="false" />
-            <element signature="e#5582#5930#0" expanded="false" />
-            <element signature="e#5936#7003#0" expanded="false" />
-            <element signature="e#7009#8047#0" expanded="false" />
-            <element signature="e#8053#8817#0" expanded="false" />
-            <element signature="e#8823#9589#0" expanded="false" />
-            <element signature="e#9595#10368#0" expanded="false" />
-            <element signature="e#10374#11219#0" expanded="false" />
-            <element signature="e#11225#12064#0" expanded="false" />
-            <element signature="e#12070#12971#0" expanded="false" />
-            <element signature="e#12977#13947#0" expanded="false" />
-            <element signature="e#13953#14844#0" expanded="false" />
-            <element signature="e#14850#15568#0" expanded="false" />
-            <element signature="e#15574#16729#0" expanded="false" />
-            <element signature="e#16735#17997#0" expanded="false" />
-            <element signature="e#18003#18851#0" expanded="false" />
-            <element signature="e#18857#19597#0" expanded="false" />
-            <element signature="e#19603#20416#0" expanded="false" />
-            <element signature="e#20422#21137#0" expanded="false" />
-            <element signature="e#21143#21876#0" expanded="false" />
-            <element signature="e#21882#22781#0" expanded="false" />
-            <element signature="e#22787#23759#0" expanded="false" />
-            <element signature="e#23765#24904#0" expanded="false" />
-            <element signature="e#24910#26156#0" expanded="false" />
-            <element signature="e#26162#27254#0" expanded="false" />
-            <element signature="e#27260#28292#0" expanded="false" />
-            <element signature="e#28298#29105#0" expanded="false" />
-            <element signature="e#29111#30047#0" expanded="false" />
-            <element signature="e#30053#31129#0" expanded="false" />
-            <element signature="e#31135#32131#0" expanded="false" />
-            <element signature="e#32137#33188#0" expanded="false" />
-            <element signature="e#33194#34656#0" expanded="false" />
-            <element signature="e#34662#36327#0" expanded="false" />
-            <element signature="e#36333#37924#0" expanded="false" />
-            <element signature="e#37930#39605#0" expanded="false" />
-            <element signature="e#39611#40478#0" expanded="false" />
-            <element signature="e#40484#41774#0" expanded="false" />
-            <element signature="e#41780#43133#0" expanded="false" />
-            <element signature="e#43139#44590#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="605">
+          <caret line="358" column="4" selection-start-line="358" selection-start-column="4" selection-end-line="358" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -690,56 +583,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
           <caret line="32" column="23" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="80" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/internet.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="1453" column="4" selection-start-line="1453" selection-start-column="4" selection-end-line="1453" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/barCodeChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
+        <state relative-caret-position="162">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="40" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/drawBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="72" column="117" selection-start-line="72" selection-start-column="117" selection-end-line="72" selection-end-column="117" />
-          <folding>
-            <element signature="n#!!doc;n#makeChart#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/L.PixiOverlay.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6390">
-          <caret line="358" column="4" selection-start-line="358" selection-start-column="4" selection-end-line="358" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="14" column="84" selection-start-line="14" selection-start-column="84" selection-end-line="14" selection-end-column="84" />
+        <state relative-caret-position="1771">
+          <caret line="147" column="19" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
           <folding>
-            <marker date="1538479349637" expanded="true" signature="3563:3653" placeholder="..." />
+            <marker date="1538755649654" expanded="true" signature="3570:3660" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="74" column="62" selection-start-line="74" selection-start-column="62" selection-end-line="74" selection-end-column="62" />
+        <state relative-caret-position="203">
+          <caret line="439" column="124" selection-start-line="439" selection-start-column="124" selection-end-line="439" selection-end-column="124" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1538571532362" expanded="true" signature="3674:4034" placeholder="..." />
-            <marker date="1538571532362" expanded="true" signature="6209:6821" placeholder="..." />
+            <element signature="e#608#676#0" expanded="false" />
+            <element signature="e#1939#2518#0" expanded="false" />
+            <marker date="1538755851228" expanded="true" signature="3779:4139" placeholder="..." />
+            <marker date="1538755851228" expanded="true" signature="6293:6905" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/drawBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+          <folding>
+            <element signature="n#!!doc;n#makeChart#0" expanded="false" />
           </folding>
         </state>
       </provider>
