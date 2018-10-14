@@ -70,28 +70,40 @@ document.addEventListener("DOMContentLoaded", function() {
 
         getJSON('data/broadband.json', function (broadband) {
 
+            var broadband_map = d3.nest()
+                .key(function(d) {
+                    return d.koatuu;
+                })
+                .map(broadband);
+
+
             markers.features.forEach(function(marker) {
-                var result = broadband.filter(function(internet) {
-                    return internet.koatuu === marker.properties.koatuu;
-                });
+                // var result = broadband.filter(function(internet) {
+                //     return internet.koatuu === marker.properties.koatuu;
+                // });
+
+                var result = broadband_map['$' + marker.properties.koatuu];
+
+                if (result == undefined) {
+                    result = [];
+                }
+
                 if (result.length == 0) {
                     marker.properties.internetInfo = [];
                 }
+                else if (result.length == 1) {
+                    marker.properties.internetInfo = result
+                }
                 else {
-                    if (result.length == 1) {
-                        marker.properties.internetInfo = result
-                    }
+                    var out = result.filter(function(d) {return marker.properties.name.includes(d.ato_name)});
+                    if (out.length == 1)
+                        marker.properties.internetInfo = out;
                     else {
-                        var out = result.filter(function(d) {return marker.properties.name.includes(d.ato_name)});
-                        if (out.length == 1)
-                            marker.properties.internetInfo = out;
+                        if (out.length > 1) {
+                            marker.properties.internetInfo = [out[0]];
+                        }
                         else {
-                            if (out.length > 1) {
-                                marker.properties.internetInfo = [out[0]];
-                            }
-                            else {
-                                marker.properties.internetInfo = result;
-                            }
+                            marker.properties.internetInfo = result;
                         }
                     }
                 }
@@ -127,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var prevZoom;
             var selectedCityData;
 
-            var tree = rbush();
+            // var tree = rbush();
 
 
             var pixiContainer = new PIXI.Graphics();
@@ -209,6 +221,10 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
                         });
 
+                        // var dataLength = totalData.map(function(d) {return d.data.length}).reduce((a, b) => a + b, 0);
+
+                        // var tree = new Flatbush(dataLength);
+
                         var tree = rbush();
 
                         // Не працювала правильно. Для визначення полігону.
@@ -232,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
 
 
+
                         totalData.forEach(function (feature, index) {
                             var bounds;
                             if (feature.data.length == 1) {
@@ -244,6 +261,16 @@ document.addEventListener("DOMContentLoaded", function() {
                                     maxY: bounds.max.y,
                                     feature: feature
                                 });
+
+                                // tree.add(
+                                //     {
+                                //         minX: bounds.min.x,
+                                //         minY: bounds.min.y,
+                                //         maxX: bounds.max.x,
+                                //         maxY: bounds.max.y,
+                                //         feature: feature
+                                //     }
+                                // );
                             }
                             else {
                                 feature.data.forEach(function (point) {
@@ -256,38 +283,51 @@ document.addEventListener("DOMContentLoaded", function() {
                                         maxY: bounds.max.y,
                                         feature: feature
                                     });
+
+                                    // tree.add(
+                                    //     {
+                                    //         minX: bounds.min.x,
+                                    //         minY: bounds.min.y,
+                                    //         maxX: bounds.max.x,
+                                    //         maxY: bounds.max.y,
+                                    //         feature: feature
+                                    //     }
+                                    // );
+
                                 });
                             }
 
-
                         });
+
+                        // tree.finish();
 
                         totalData = null;
 
-                        markers.features.forEach(function (projectedPolygon) {
 
-                            // var triangle = new PIXI.Graphics();
+                        // Here I draw polygons
+                        markers.features.forEach(function (projectedPolygon) {
+                            if (projectedPolygon.properties.koatuu == 8000000000) {
+                                debugger;
+                            }
 
                             var color, alpha
-                            if (projectedPolygon.properties.status == "true") {
+                            if (projectedPolygon.properties.internetInfo.length == 1) {
                                 // triangle.lineStyle(3 / scale, 0xffffff, 1);
                                 // triangle.begFinFill(0xc20000, 1);
                                 color = 0xc20000;
-                                // color = 0xf5fbf3;
                                 alpha = 0.6;
 
                             }
                             else {
                                 // triangle.lineStyle(3 / scale, 0xffffff, 1);
                                 // triangle.beginFill(0x0000ff, 1);
-                                color = 0x0000ff;
-                                // color = 0xf3f7fb;
+                                color = 0xd3d3d3;
                                 alpha = 0.6;
                             }
 
 
-                            if (projectedPolygon.geometry.coordinates[0].length <= 1) {
-                                // triangle.clear();
+                            if (projectedPolygon.geometry.coordinates.length <= 1) {
+
                                 // triangle.lineStyle( 0x3388ff, 1);
                                 triangle.beginFill(color, alpha);
                                 projectedPolygon.geometry.coordinates[0][0].forEach(function (coords, index) {
@@ -296,11 +336,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 });
                                 triangle.endFill();
 
-                                // pixiContainer.addChild(triangle);
                             }
                             else {
                                 projectedPolygon.geometry.coordinates.forEach(function (pol) {
-                                    // triangle.clear();
                                     // // triangle.lineStyle( 0x3388ff, 1);
                                     // triangle.beginFill(color, alpha);
                                     pol.forEach(function (coords, index) {
@@ -311,14 +349,11 @@ document.addEventListener("DOMContentLoaded", function() {
                                         if (index == 0) triangle.moveTo(coords.x, coords.y);
                                         else triangle.lineTo(coords.x, coords.y);
                                         triangle.endFill();
-                                        // pixiContainer.addChild(triangle);
                                     });
-                                    // triangle.endFill();
                                 })
 
                             }
 
-                            // pixiContainer.addChild(triangle);
                         });
                         markers = null;
 
@@ -332,14 +367,45 @@ document.addEventListener("DOMContentLoaded", function() {
                                 maxY: point.y
                             });
 
-                            return features;
 
+
+                            // var features = tree.search({
+                            //         minX: point.x,
+                            //         minY: point.y,
+                            //         maxX: point.x,
+                            //         maxY: point.y
+                            //     }).map((i) => items[i]);
+                            
+                            
+                            
+                            //working here !!!!!!!!!!!!!
+                            //Потрібно змінити об'єкти на списки і після цього
+                            // можна користуватися функцією для точного визначення полігона
+                            
+                            features.forEach(function(d) {
+                                d.feature.data[0].forEach(function(d, i, arr) {
+                                    arr[i] = Object.values(d);
+                                })
+                            });
+
+
+                            var checker;
+                            features.forEach(function (d) {
+                                if (containsPoint(d.feature.data, point)){
+                                    checker = true;
+                                    features = [d];
+                                }
+                            });
+
+                            if (checker) {
+                                return features;
+                            }
 
                         }
 
                         function focusFeature(feat) {
                             if (focus) focus.removeFrom(utils.getMap());
-                            if (feat.status != "false") {
+                            if (feat[0].length != 1) {
                                 var geojson = {
                                     'type': 'Feature', 'geometry': {
                                         'type': 'MultiPolygon', 'coordinates': [feat[0].feature.data]
@@ -374,6 +440,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         });
 
                         // старий і повільний код графіка
+
                         // function smallChartBarcode(feat, selection) {
                         //
                         //     getJSON('data/broadband.json', function (data) {
@@ -426,6 +493,14 @@ document.addEventListener("DOMContentLoaded", function() {
                                 maxY: boundCoordinates[0][0].y
                             });
 
+                            // var boundCities = tree.search({
+                            //         minX: boundCoordinates[0][0].x,
+                            //         minY: boundCoordinates[1][0].y,
+                            //         maxX: boundCoordinates[1][0].x,
+                            //         maxY: boundCoordinates[0][0].y
+                            //     }).map((i) => items[i]);
+
+
                             boundCitiesData = boundCities.map(function(d) {return d.feature.internetInfo});
                             boundCities = null;
 
@@ -436,7 +511,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             else {
                                 d3.selectAll('#histo .tableRow *').remove();
                                 // selectedKOATUU = null;
-                                selectedCityData = []
+                                // selectedCityData = []
                             }
 
 

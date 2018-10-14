@@ -122,36 +122,31 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
+
+    // Потрібно переписати так, щоб малювало один раз для однієї швидкості і шукало співпадіння по швидкості
     g.selectAll(".bar")
-        .data(data)
+        .data(data.filter(function(d){return d}))
         .enter().append("rect")
         .attr('id', function (d) {
-            if (d != undefined){
                 return "id" + d.koatuu;
-            }
         })
         .attr("class", function (d) {
-            if (d != undefined) {
                 return "bar"
-            }
         })
         .attr("x", function (d) {
-            if (d != undefined){
                 return logScale(+d[intUserName] + 1);
-            }
         })
-        .attr("y", 3)
+        .attr("y", 0)
         .attr("width", 1)
         .attr("height", function (d) {
-            if (d != undefined) {
                 return height;
-            }
-        })
-        .style("opacity", function (d) {
-            if (d != undefined) {
-                return d[1] / 1000
-            }
         });
+        // .style("opacity", function (d) {
+        //     if (d != undefined) {
+        //         return d[1] / 1000
+        //     }
+        // })
 
 
 
@@ -160,32 +155,40 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     changeClass(selectedKOATUU);
 
 
-    // function changeClass(selectedKOATUU) {
-    //     if (selectedKOATUU != null) {
-    //         d3.selectAll('.bar')
-    //             .attr('class', function (d) {
-    //                 if (d.koatuu == selectedKOATUU.koatuu) {
-    //                     return 'barSelected'
-    //                 }
-    //                 else {
-    //                     return 'bar'
-    //                 }
-    //             })
-    //     }
-    // }
 
     function changeClass(selectedKOATUU) {
         if (selectedKOATUU != null && selectedKOATUU.length > 0) {
-            d3.selectAll("#id" + selectedKOATUU[0].koatuu)
-                .style('height', function (d) {
-                        return height + 3
-                })
-                .style('fill', function (d) {
+            if (selectedKOATUU.length == 1) {
+                d3.selectAll("#id" + selectedKOATUU[0].koatuu)
+                    .style('height', function (d) {
+                        return height + 10
+                    })
+                    .style('width', function (d) {
+                        return 2
+                    })
+                    .style('fill', function (d) {
                         return "red"
-                })
-                .attr('y', function (d) {
-                        return 9
-                })
+                    })
+                    .attr('y', function (d) {
+                        return -10
+                    })
+            }
+            else {
+                d3.selectAll("#id" + Object.values(selectedKOATUU)[0].koatuu)
+                    .style('height', function (d) {
+                        return height + 10
+                    })
+
+                    .style('width', function (d) {
+                        return 2
+                    })
+                    .style('fill', function (d) {
+                        return "red"
+                    })
+                    .attr('y', function (d) {
+                        return -10
+                    })
+            }
         }
     }
 
