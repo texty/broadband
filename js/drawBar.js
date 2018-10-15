@@ -3,7 +3,7 @@
  */
 
 function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
-
+    
 
     var namesDict = {'munic_int_speed': 'Органи місцевої влади',
         'edu_int_speed': 'Заклади освіти',
@@ -16,14 +16,11 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     var result = data.map(a => Math.round(+a[intUserName]));
 
-    if (selectedKOATUU != undefined && !result.includes(+selectedKOATUU[0][intUserName])) {
+    if (selectedKOATUU != undefined && selectedKOATUU.length != 0 && !result.includes(+selectedKOATUU[0][intUserName])) {
         result.push(+selectedKOATUU[0][intUserName]);
         selectedSpeed = +selectedKOATUU[0][intUserName];
     }
 
-    if (selectedKOATUU != undefined) {
-        console.log('speeed: ' + selectedKOATUU[0].household_int_speed);
-    }
 
 
 
@@ -82,8 +79,10 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     var max = d3.max(dataForChart);
 //
     var logScale = d3.scaleLog()
-        .domain([min+0.1, max])
-        .range([0, 100]);
+        .domain([1, max])
+        .range([1, width]);
+
+
 
     // var pairs = {};
     //
@@ -128,7 +127,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     //     //
     //     var percents= number/totalNumber * 100;
     //
-        d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text(
+        d3.select("#histo " + " " + "#" + intUserName).append("p").attr('class', 'cell').text(
             namesDict[intUserName]
             // Math.round(percent) + "%"
         );
@@ -142,10 +141,20 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     var svg = d3.select("#histo " + "#" + intUserName + '_second').append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
+        .attr("height", height + margin.top + margin.bottom)
+        .attr('class', 'bars');
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+    var xAxis = d3.axisBottom(logScale).tickFormat(d3.format("d")).tickValues(['1', '5', '40', '100']);
+
+
+    svg.append("g")
+        .attr("class", "xAxis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis); // Create an axis component with d3.axisBottom
 
 
 

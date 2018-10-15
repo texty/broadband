@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
         map.zoomControl.setPosition('bottomright');
 
 
-        L.Control.geocoder().addTo(map);
+            // L.Control.geocoder().addTo(map);
 
         var pixiOverlay = (function () {
             var frame = null;
@@ -216,6 +216,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 //here map was drawn
                 if (firstDraw) {
                     (function () {
+
+                        var geocoder = L.Control.geocoder({
+                            defaultMarkGeocode: false
+                        })
+                            .on('markgeocode', function(e) {
+                                debugger;
+
+                                var feat = findFeature(e.geocode.center);
+                                focusFeature(feat);
+
+                                var bbox = e.geocode.bbox;
+                                var poly = L.polygon([
+                                    bbox.getSouthEast(),
+                                    bbox.getNorthEast(),
+                                    bbox.getNorthWest(),
+                                    bbox.getSouthWest()
+                                ])//.addTo(map);
+                                map.fitBounds(poly.getBounds());
+                            })
+                            .addTo(map);
 
                         var totalData = markers.features.map(function (dd) {
                             if (dd.geometry.coordinates.length <= 1) {
@@ -428,7 +448,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         function focusFeature(feat) {
                             if (focus) focus.removeFrom(utils.getMap());
-                            // if (feat[0].length != 1) {
+                            if (feat.length == 1) {
                                 var geojson = {
                                     'type': 'Feature', 'geometry': {
                                         'type': 'MultiPolygon', 'coordinates': [feat[0].feature.data]
@@ -452,10 +472,10 @@ document.addEventListener("DOMContentLoaded", function() {
                                 smallChartBarcode(map.getBounds(), feat);
                                 focus.addTo(utils.getMap());
 //
-//                             } else {
-//                                 focus = null;
-// //										L.DomUtil.addClass(legend, 'hide');
-//                             }
+                            } else {
+                                focus = null;
+//										L.DomUtil.addClass(legend, 'hide');
+                            }
                         }
 
                         utils.getMap().on('click', function (e) {
@@ -551,7 +571,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
                             var margin = {top: 1, right: 1, bottom: 1, left: 1},
-                                width = 150 - margin.left - margin.right,
+                                width = 250 - margin.left - margin.right,
                                 height = 20 - margin.top - margin.bottom;
 
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'household_int_speed');
