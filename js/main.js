@@ -76,6 +76,43 @@ document.addEventListener("DOMContentLoaded", function() {
                 })
                 .map(broadband);
 
+            var privatIntSpeed = broadband.map(function(d) {return +d['household_int_speed']});
+
+            function sortNumber(a,b) {
+                return a - b;
+            }
+
+            function quantile(array, percentile) {
+                array.sort(sortNumber);
+                index = percentile/100. * (array.length-1);
+                if (Math.floor(index) == index) {
+                    result = array[index];
+                } else {
+                    i = Math.floor(index)
+                    fraction = index - i;
+                    result = array[i] + (array[i+1] - array[i]) * fraction;
+                }
+                return result;
+            }
+
+
+            var totalMaxSpeed = quantile(privatIntSpeed,95);
+            var totalMinSpeed = 0;
+
+            var speedLogScale = d3.scaleLog()
+                .domain([totalMinSpeed + 0.1, totalMaxSpeed])
+                .range([0, 1]);
+
+            var speedColorScale = d3.interpolateReds;
+
+            function rgb2hex(rgb){
+                rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+                return (rgb && rgb.length === 4) ? "#" +
+                ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+            }
+
 
             markers.features.forEach(function(marker) {
                 // var result = broadband.filter(function(internet) {
@@ -138,9 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var firstDraw = true;
             var prevZoom;
             var selectedCityData;
-            var selectedCitySpeed;
 
-            // var tree = rbush();
 
 
             var pixiContainer = new PIXI.Graphics();
@@ -222,9 +257,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
                         });
 
-                        // var dataLength = totalData.map(function(d) {return d.data.length}).reduce((a, b) => a + b, 0);
-
-                        // var tree = new Flatbush(dataLength);
 
                         var tree = rbush();
 
@@ -263,15 +295,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     feature: feature
                                 });
 
-                                // tree.add(
-                                //     {
-                                //         minX: bounds.min.x,
-                                //         minY: bounds.min.y,
-                                //         maxX: bounds.max.x,
-                                //         maxY: bounds.max.y,
-                                //         feature: feature
-                                //     }
-                                // );
+
                             }
                             else {
                                 feature.data.forEach(function (point) {
@@ -285,22 +309,12 @@ document.addEventListener("DOMContentLoaded", function() {
                                         feature: feature
                                     });
 
-                                    // tree.add(
-                                    //     {
-                                    //         minX: bounds.min.x,
-                                    //         minY: bounds.min.y,
-                                    //         maxX: bounds.max.x,
-                                    //         maxY: bounds.max.y,
-                                    //         feature: feature
-                                    //     }
-                                    // );
 
                                 });
                             }
 
                         });
 
-                        // tree.finish();
 
                         totalData = null;
 
@@ -308,17 +322,28 @@ document.addEventListener("DOMContentLoaded", function() {
                         // Here I draw polygons
                         markers.features.forEach(function (projectedPolygon) {
 
-                            var color, alpha
+                            var color, alpha;
                             if (projectedPolygon.properties.internetInfo.length == 1) {
                                 // triangle.lineStyle(3 / scale, 0xffffff, 1);
-                                // triangle.begFinFill(0xc20000, 1);
-                                color = 0xc20000;
-                                alpha = 0.6;
+                                // alpha = 0.6;
+
+                                if (+projectedPolygon.properties.internetInfo[0].household_int_speed > 10) {
+                                    debugger;
+                                }
+
+                                var speedNumber = +projectedPolygon.properties.internetInfo[0].household_int_speed;
+
+                                var speedConverted =  (Math.round(speedNumber) > totalMaxSpeed ? totalMaxSpeed : Math.round(speedNumber));
+                                var rgbColorNumber = speedLogScale(speedConverted + 1);
+                                var rgbColor = speedColorScale(rgbColorNumber);
+
+
+                                var intermediateColor = rgb2hex(rgbColor);
+                                color = intermediateColor.replace('#', '0x')
 
                             }
                             else {
                                 // triangle.lineStyle(3 / scale, 0xffffff, 1);
-                                // triangle.beginFill(0x0000ff, 1);
                                 color = 0xd3d3d3;
                                 alpha = 0.6;
                             }
@@ -413,9 +438,10 @@ document.addEventListener("DOMContentLoaded", function() {
                                     coordsToLatLng: utils.layerPointToLatLng,
                                     style: function (feature) {
                                         return {
-                                            fillColor: ' #008000',
+                                            fillColor: '#FFD700',
                                             fillOpacity: 0.5,
-                                            stroke: true
+                                            stroke: true,
+                                            color: '#FFD700'
                                         };
                                     },
                                     interactive: false

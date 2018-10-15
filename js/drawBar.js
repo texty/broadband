@@ -4,15 +4,28 @@
 
 function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
-    window.data = data;
-    window.selectedKOATUU = selectedKOATUU;
+
+    var namesDict = {'munic_int_speed': 'Органи місцевої влади',
+        'edu_int_speed': 'Заклади освіти',
+        'household_int_speed':'Користувачі',
+        'health_int_speed':'Лікарні',
+        'culture_int_speed':'Заклади культури'};
+
+    var selectedSpeed;
 
 
     var result = data.map(a => Math.round(+a[intUserName]));
 
     if (selectedKOATUU != undefined && !result.includes(+selectedKOATUU[0][intUserName])) {
-        result.push(+selectedKOATUU[0][intUserName])
+        result.push(+selectedKOATUU[0][intUserName]);
+        selectedSpeed = +selectedKOATUU[0][intUserName];
     }
+
+    if (selectedKOATUU != undefined) {
+        console.log('speeed: ' + selectedKOATUU[0].household_int_speed);
+    }
+
+
 
     var speeds = {};
 
@@ -21,6 +34,12 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     });
 
     var dataForChart = Object.keys(speeds).map(function(d){return +d}).filter(function(d) {return !isNaN(d)});
+
+
+    //Якщо пригодиться
+    var percent = dataForChart.indexOf(selectedSpeed)/dataForChart.length * 100;
+    console.log(percent + "%");
+
 
     // var intSpeedNotClean = data.map(function(d) {
     //     if (d.length == 1) {
@@ -109,10 +128,10 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     //     //
     //     var percents= number/totalNumber * 100;
     //
-    //     d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text(
-    //         // namesDict[intUserName] + ' ' +
-    //         Math.round(percents) + "%"
-    //     );
+        d3.select("#histo " + "#" + intUserName).append("p").attr('class', 'cell').text(
+            namesDict[intUserName]
+            // Math.round(percent) + "%"
+        );
     //
     //
     //     // donutChart(Math.round(percents),intUserName);
