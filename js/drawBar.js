@@ -4,33 +4,39 @@
 
 function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
+    window.data = data;
+    window.selectedKOATUU = selectedKOATUU;
 
 
-    var namesDict = {'munic_int_speed': 'Органи місцевої влади',
-        'edu_int_speed': 'Заклади освіти',
-        'household_int_speed':'Користувачі',
-        'health_int_speed':'Лікарні',
-        'culture_int_speed':'Заклади культури'};
+    var result = data.map(a => Math.round(+a[intUserName]));
 
-    
+    if (selectedKOATUU != undefined && !result.includes(+selectedKOATUU[0][intUserName])) {
+        result.push(+selectedKOATUU[0][intUserName])
+    }
 
-    // var result = data.map(a => Math.round(a[intUserName]));
+    var speeds = {};
 
-    var intSpeedNotClean = data.map(function(d) {
-        if (d.length == 1) {
-            return d[0];
-        }
-        else {
-            if (d.length == 2) {
-                return d[0][0];
-            }
-            else {
-                return "no"
-            }
-        }
+    result.forEach(function(d){
+        speeds[d] = true;
     });
-    //
-    data = intSpeedNotClean.filter(function(d) {return d != 'no'});
+
+    var dataForChart = Object.keys(speeds).map(function(d){return +d}).filter(function(d) {return !isNaN(d)});
+
+    // var intSpeedNotClean = data.map(function(d) {
+    //     if (d.length == 1) {
+    //         return d[0];
+    //     }
+    //     else {
+    //         if (d.length == 2) {
+    //             return d[0][0];
+    //         }
+    //         else {
+    //             return "no"
+    //         }
+    //     }
+    // });
+    // //
+    // data = intSpeedNotClean.filter(function(d) {return d != 'no'});
 
 //     data.map(function(d) {
 //         if (d.length == 1) {
@@ -53,11 +59,11 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 //     }
 //     // var result = data.map(a => [Math.round(a[intUserName]), a.koatuu]);
 //
-//     var min = d3.min(result);
-//     var max = d3.max(result);
+    var min = d3.min(dataForChart);
+    var max = d3.max(dataForChart);
 //
     var logScale = d3.scaleLog()
-        .domain([1, 300])
+        .domain([min+0.1, max])
         .range([0, 100]);
 
     // var pairs = {};
@@ -126,27 +132,23 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     // Потрібно переписати так, щоб малювало один раз для однієї швидкості і шукало співпадіння по швидкості
     g.selectAll(".bar")
-        .data(data.filter(function(d){return d}))
+        .data(dataForChart)
         .enter().append("rect")
         .attr('id', function (d) {
-                return "id" + d.koatuu;
+                return "id" + d + "_" + intUserName;
         })
         .attr("class", function (d) {
                 return "bar"
         })
         .attr("x", function (d) {
-                return logScale(+d[intUserName] + 1);
+                return logScale(+d + 1);
         })
         .attr("y", 0)
         .attr("width", 1)
         .attr("height", function (d) {
                 return height;
         });
-        // .style("opacity", function (d) {
-        //     if (d != undefined) {
-        //         return d[1] / 1000
-        //     }
-        // })
+
 
 
 
@@ -159,7 +161,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     function changeClass(selectedKOATUU) {
         if (selectedKOATUU != null && selectedKOATUU.length > 0) {
             if (selectedKOATUU.length == 1) {
-                d3.selectAll("#id" + selectedKOATUU[0].koatuu)
+                d3.selectAll("#id" + Math.round(selectedKOATUU[0][intUserName]) + "_" + intUserName) //.style('fill', 'red');
                     .style('height', function (d) {
                         return height + 10
                     })
@@ -170,11 +172,11 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
                         return "red"
                     })
                     .attr('y', function (d) {
-                        return -10
+                        return -5
                     })
             }
             else {
-                d3.selectAll("#id" + Object.values(selectedKOATUU)[0].koatuu)
+                d3.selectAll('.bar')
                     .style('height', function (d) {
                         return height + 10
                     })
@@ -183,10 +185,10 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
                         return 2
                     })
                     .style('fill', function (d) {
-                        return "red"
+                        return "blue"
                     })
                     .attr('y', function (d) {
-                        return -10
+                        return -5
                     })
             }
         }

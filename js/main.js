@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var firstDraw = true;
             var prevZoom;
             var selectedCityData;
+            var selectedCitySpeed;
 
             // var tree = rbush();
 
@@ -306,9 +307,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         // Here I draw polygons
                         markers.features.forEach(function (projectedPolygon) {
-                            if (projectedPolygon.properties.koatuu == 8000000000) {
-                                debugger;
-                            }
 
                             var color, alpha
                             if (projectedPolygon.properties.internetInfo.length == 1) {
@@ -405,7 +403,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         function focusFeature(feat) {
                             if (focus) focus.removeFrom(utils.getMap());
-                            if (feat[0].length != 1) {
+                            // if (feat[0].length != 1) {
                                 var geojson = {
                                     'type': 'Feature', 'geometry': {
                                         'type': 'MultiPolygon', 'coordinates': [feat[0].feature.data]
@@ -428,10 +426,10 @@ document.addEventListener("DOMContentLoaded", function() {
                                 smallChartBarcode(map.getBounds(), feat);
                                 focus.addTo(utils.getMap());
 //
-                            } else {
-                                focus = null;
-//										L.DomUtil.addClass(legend, 'hide');
-                            }
+//                             } else {
+//                                 focus = null;
+// //										L.DomUtil.addClass(legend, 'hide');
+//                             }
                         }
 
                         utils.getMap().on('click', function (e) {
@@ -500,8 +498,19 @@ document.addEventListener("DOMContentLoaded", function() {
                             //         maxY: boundCoordinates[0][0].y
                             //     }).map((i) => items[i]);
 
+                            var boundCitiesData = boundCities.map(function(d) {return d.feature.internetInfo})
+                                .filter(function(d) {return d.length > 0})
+                                .map(function(d) {if (d.length > 1)  {
+                                    return d[0];
+                                }
+                                else {
+                                    return d[0];
+                                }
 
-                            boundCitiesData = boundCities.map(function(d) {return d.feature.internetInfo});
+                                });
+
+
+                            // boundCitiesData = boundCities.map(function(d) {return d.feature.internetInfo});
                             boundCities = null;
 
                             if (selectedCity != null) {
@@ -523,6 +532,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'edu_int_speed');
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'health_int_speed');
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'culture_int_speed');
+                            makeChart(boundCitiesData, margin, width, height, selectedCityData, 'munic_int_speed');
+
 
                         }
 
