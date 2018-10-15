@@ -80,7 +80,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 //
     var logScale = d3.scaleLog()
         .domain([1, max])
-        .range([1, width]);
+        .range([1, width + 10]);
 
 
 
@@ -127,7 +127,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     //     //
     //     var percents= number/totalNumber * 100;
     //
-        d3.select("#histo " + " " + "#" + intUserName).append("p").attr('class', 'cell').text(
+        d3.select("#histo " + " " + "#" + intUserName + '_second').append("p").attr('class', 'cell').text(
             namesDict[intUserName]
             // Math.round(percent) + "%"
         );
