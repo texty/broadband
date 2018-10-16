@@ -567,7 +567,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
 
 
-                            var margin = {top: 0, right: 30, bottom: 0, left: 30},
+                            var margin = {top: 0, right: 20, bottom: 0, left: 20},
                                 width = 300 - margin.left - margin.right,
                                 height = 20 - margin.top - margin.bottom;
 

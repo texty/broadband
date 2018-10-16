@@ -38,13 +38,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="166" column="5" selection-start-line="166" selection-start-column="5" selection-end-line="166" selection-end-column="5" />
+            <state relative-caret-position="371">
+              <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
               <folding>
-                <marker date="1539684216064" expanded="true" signature="3667:3757" placeholder="..." />
+                <marker date="1539703285334" expanded="true" signature="3570:3660" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -53,8 +53,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="569" column="59" selection-start-line="569" selection-start-column="59" selection-end-line="569" selection-end-column="59" />
+            <state relative-caret-position="203">
+              <caret line="580" column="66" selection-start-line="580" selection-start-column="65" selection-end-line="580" selection-end-column="66" />
               <folding>
                 <element signature="e#608#676#0" expanded="false" />
                 <element signature="e#5840#6089#0" expanded="false" />
@@ -65,29 +65,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="drawBar.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="drawBar.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/drawBar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-108">
-              <caret line="176" column="47" selection-start-line="176" selection-start-column="47" selection-end-line="176" selection-end-column="47" />
+            <state relative-caret-position="414">
+              <caret line="25" column="160" selection-start-line="25" selection-start-column="160" selection-end-line="25" selection-end-column="160" />
               <folding>
                 <element signature="n#!!doc;n#makeChart#0" expanded="false" />
-                <element signature="e#1114#1162#0" expanded="false" />
-                <element signature="e#1518#1547#0" expanded="false" />
-                <element signature="e#2322#2340#0" expanded="false" />
-                <element signature="e#2550#2571#0" expanded="false" />
-                <marker date="1539697524425" expanded="true" signature="487:663" placeholder="..." />
+                <element signature="e#1220#1268#0" expanded="false" />
+                <element signature="e#1624#1653#0" expanded="false" />
+                <marker date="1539703001455" expanded="true" signature="489:665" placeholder="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="broadband.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/broadband.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="615" selection-start-line="0" selection-start-column="598" selection-end-line="0" selection-end-column="615" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -129,9 +117,9 @@
         <option value="$PROJECT_DIR$/js/donutChart.js" />
         <option value="$PROJECT_DIR$/data/donutChart.js" />
         <option value="$PROJECT_DIR$/js/barCodeChart.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/js/drawBar.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -306,12 +294,12 @@
       <workItem from="1539509564752" duration="6915000" />
       <workItem from="1539593387309" duration="4576000" />
       <workItem from="1539605309360" duration="26933000" />
-      <workItem from="1539678810068" duration="10579000" />
+      <workItem from="1539678810068" duration="14348000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="394469000" />
+    <option name="totallyTimeSpent" value="398238000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1745" y="24" width="1301" height="744" extended-state="6" />
@@ -621,20 +609,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="166" column="5" selection-start-line="166" selection-start-column="5" selection-end-line="166" selection-end-column="5" />
-          <folding>
-            <marker date="1539684216064" expanded="true" signature="3667:3757" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="569" column="59" selection-start-line="569" selection-start-column="59" selection-end-line="569" selection-end-column="59" />
+        <state relative-caret-position="203">
+          <caret line="580" column="66" selection-start-line="580" selection-start-column="65" selection-end-line="580" selection-end-column="66" />
           <folding>
             <element signature="e#608#676#0" expanded="false" />
             <element signature="e#5840#6089#0" expanded="false" />
@@ -646,15 +624,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/drawBar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="176" column="47" selection-start-line="176" selection-start-column="47" selection-end-line="176" selection-end-column="47" />
+        <state relative-caret-position="414">
+          <caret line="25" column="160" selection-start-line="25" selection-start-column="160" selection-end-line="25" selection-end-column="160" />
           <folding>
             <element signature="n#!!doc;n#makeChart#0" expanded="false" />
-            <element signature="e#1114#1162#0" expanded="false" />
-            <element signature="e#1518#1547#0" expanded="false" />
-            <element signature="e#2322#2340#0" expanded="false" />
-            <element signature="e#2550#2571#0" expanded="false" />
-            <marker date="1539697524425" expanded="true" signature="487:663" placeholder="..." />
+            <element signature="e#1220#1268#0" expanded="false" />
+            <element signature="e#1624#1653#0" expanded="false" />
+            <marker date="1539703001455" expanded="true" signature="489:665" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+          <folding>
+            <marker date="1539703285334" expanded="true" signature="3570:3660" placeholder="..." />
           </folding>
         </state>
       </provider>

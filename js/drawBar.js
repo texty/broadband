@@ -7,11 +7,11 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     var ticksToAdd = [];
     
 
-    var namesDict = {'munic_int_speed': 'Органи місцевої влади',
-        'edu_int_speed': 'Заклади освіти',
-        'household_int_speed':'Користувачі',
-        'health_int_speed':'Лікарні',
-        'culture_int_speed':'Заклади культури'};
+    var namesDict = {'munic_int_speed': 'органи влади',
+        'edu_int_speed': 'заклади освіти',
+        'household_int_speed':'користувачі',
+        'health_int_speed':'лікувальні заклади',
+        'culture_int_speed':'заклади культури'};
 
     var selectedSpeed;
 
@@ -23,7 +23,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     }
 
     if (selectedKOATUU != undefined && selectedKOATUU.length != 0 ) {
-        selectedSpeed = +selectedKOATUU[0][intUserName];
+        selectedSpeed = typeof(selectedKOATUU[0][intUserName]) == 'string' ? +selectedKOATUU[0][intUserName].replace(',', '.') : +selectedKOATUU[0][intUserName]
     }
 
 
@@ -136,10 +136,10 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     //     //
     //     var percents= number/totalNumber * 100;
     //
-    //     d3.select("#histo " + " " + "#" + intUserName + '_second').append("p").attr('class', 'cell').text(
-    //         namesDict[intUserName]
-    //         // Math.round(percent) + "%"
-    //     );
+        d3.select("#histo " + " " + "#" + intUserName).append("p").attr('class', 'cell').text(
+            namesDict[intUserName]
+            // Math.round(percent) + "%"
+        );
     
     
     
@@ -156,8 +156,8 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
         .attr("height", height + margin.top + margin.bottom)
         .attr('class', 'bars');
 
-    svg.append("g")
-        // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
 
@@ -172,12 +172,12 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     var xZeroAxis = d3.axisBottom(scaleZero);
 
-    svg.append("g")
+    g.append("g")
         .attr("class", "xAxis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis); // Create an axis component with d3.axisBottom
 
-    svg.append("g")
+    g.append("g")
         .attr("class", "x-zero axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xZeroAxis);
@@ -185,7 +185,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
 
     // Потрібно переписати так, щоб малювало один раз для однієї швидкості і шукало співпадіння по швидкості
-    svg.selectAll(".bar")
+    g.selectAll(".bar")
         .data(dataForChart)
         .enter().append("rect")
         .attr('id', function (d) {
