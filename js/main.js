@@ -347,10 +347,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                 // triangle.lineStyle(3 / scale, 0xffffff, 1);
                                 // alpha = 0.6;
 
-                                if (+projectedPolygon.properties.internetInfo[0].household_int_speed > 10) {
-                                    debugger;
-                                }
-
                                 var speedNumber = +projectedPolygon.properties.internetInfo[0].household_int_speed;
 
                                 var speedConverted =  (Math.round(speedNumber) > totalMaxSpeed ? totalMaxSpeed : Math.round(speedNumber));
@@ -561,6 +557,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                             if (selectedCity != null) {
                                 d3.selectAll('#histo .tableRow *').remove();
+                                d3.select('div.cityName').remove();
                                 selectedCityData = selectedCity[0].feature.internetInfo;
                             }
                             else {
@@ -570,8 +567,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
 
 
-                            var margin = {top: 1, right: 1, bottom: 1, left: 1},
-                                width = 250 - margin.left - margin.right,
+                            var margin = {top: 0, right: 30, bottom: 0, left: 30},
+                                width = 300 - margin.left - margin.right,
                                 height = 20 - margin.top - margin.bottom;
 
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'household_int_speed');
@@ -579,6 +576,10 @@ document.addEventListener("DOMContentLoaded", function() {
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'health_int_speed');
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'culture_int_speed');
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'munic_int_speed');
+
+                            // d3.select('div.cityName').append("p").text(
+                            //     selectedCityData == undefined ? "Оберіть місто" : selectedCityData[0].ato_name
+                            // );
 
 
                         }

@@ -3,6 +3,8 @@
  */
 
 function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
+
+    var ticksToAdd = [];
     
 
     var namesDict = {'munic_int_speed': 'Органи місцевої влади',
@@ -18,6 +20,9 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     if (selectedKOATUU != undefined && selectedKOATUU.length != 0 && !result.includes(+selectedKOATUU[0][intUserName])) {
         result.push(+selectedKOATUU[0][intUserName]);
+    }
+
+    if (selectedKOATUU != undefined && selectedKOATUU.length != 0 ) {
         selectedSpeed = +selectedKOATUU[0][intUserName];
     }
 
@@ -35,7 +40,6 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     //Якщо пригодиться
     var percent = dataForChart.indexOf(selectedSpeed)/dataForChart.length * 100;
-    console.log(percent + "%");
 
 
     // var intSpeedNotClean = data.map(function(d) {
@@ -80,7 +84,12 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 //
     var logScale = d3.scaleLog()
         .domain([1, max])
-        .range([1, width + 10]);
+        .range([0, width]);
+
+    var scaleZero = d3.scaleOrdinal()
+        .domain([0])
+        .range([-0.001]);
+
 
 
 
@@ -127,10 +136,13 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     //     //
     //     var percents= number/totalNumber * 100;
     //
-        d3.select("#histo " + " " + "#" + intUserName + '_second').append("p").attr('class', 'cell').text(
-            namesDict[intUserName]
-            // Math.round(percent) + "%"
-        );
+    //     d3.select("#histo " + " " + "#" + intUserName + '_second').append("p").attr('class', 'cell').text(
+    //         namesDict[intUserName]
+    //         // Math.round(percent) + "%"
+    //     );
+    
+    
+    
     //
     //
     //     // donutChart(Math.round(percents),intUserName);
@@ -144,22 +156,36 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
         .attr("height", height + margin.top + margin.bottom)
         .attr('class', 'bars');
 
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    svg.append("g")
+        // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    var xAxis = d3.axisBottom(logScale).tickFormat(d3.format("d")).tickValues(['1', '5', '40', '100']);
 
+    if (selectedSpeed != undefined) {
+        ticksToAdd.push('' + selectedSpeed, '' + max);
+    }
+    else {
+        ticksToAdd.push('' + max);
+    }
+
+    var xAxis = d3.axisBottom(logScale).tickFormat(d3.format("d")).tickValues(ticksToAdd.filter((v, i, a) => a.indexOf(v) === i));
+
+    var xZeroAxis = d3.axisBottom(scaleZero);
 
     svg.append("g")
         .attr("class", "xAxis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis); // Create an axis component with d3.axisBottom
 
+    svg.append("g")
+        .attr("class", "x-zero axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xZeroAxis);
+
 
 
     // Потрібно переписати так, щоб малювало один раз для однієї швидкості і шукало співпадіння по швидкості
-    g.selectAll(".bar")
+    svg.selectAll(".bar")
         .data(dataForChart)
         .enter().append("rect")
         .attr('id', function (d) {
@@ -179,9 +205,6 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
 
 
-
-
-
     changeClass(selectedKOATUU);
 
 
@@ -189,7 +212,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     function changeClass(selectedKOATUU) {
         if (selectedKOATUU != null && selectedKOATUU.length > 0) {
             if (selectedKOATUU.length == 1) {
-                d3.selectAll("#id" + Math.round(selectedKOATUU[0][intUserName]) + "_" + intUserName) //.style('fill', 'red');
+                d3.selectAll("#id" + Math.round(selectedKOATUU[0][intUserName]) + "_" + intUserName)
                     .style('height', function (d) {
                         return height + 10
                     })

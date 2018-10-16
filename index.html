@@ -46,6 +46,7 @@
 		<div class="col-4">
 			<div class="title"><p>
 				<h3>Рейтинг швидкості інтернету </h3>
+				<div class="cityName"></div>
 			</p></div>
 			<div id="histo">
 				<div class="tableRow" id="household_int_speed">
@@ -96,6 +97,7 @@
 
 	.tableRow {
 		display: table-row;
+		margin-bottom: 0.5em;
 	}
 
 	.col-4 {
@@ -113,9 +115,9 @@
 	}
 
 	div#histo p {
-		text-align: left;
-		margin-top: 0.5rem;
-		margin-bottom: 0.5rem;
+		text-align: center;
+		/*margin-top: 0.5rem;*/
+		/*margin-bottom: 0.5rem;*/
 	}
 
 
@@ -141,7 +143,7 @@
 	}
 	.bar {
 		margin-bottom: 1em;
-		fill: steelblue;
+		fill: #d3d3d3;
 		opacity: 0.6;
 		z-index: 0.6;
 	}
@@ -155,6 +157,15 @@
 	.xAxis {
 		overflow: visible;
 	}
+
+	path.domain {
+		display:none;
+	}
+
+	g.xAxis line {
+		display: none;
+	}
+
 
 
 </style>
