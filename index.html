@@ -38,16 +38,23 @@
 </head>
 <body>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-8">
+<div class="container-fluid page1">
+	<div class="row row1">
+		<div class="col-12 col-md-8 col-lg-6 title">
+			<h3>Рейтинг швидкості інтернету </h3>
+			<p>
+				Дивіться на карту, щоб дізнатися яка швидкість інтернету у різних містах України.
+				Чим насиченіший червоний колір у міста, тим вища швидкість.
+				Графік з правого боку від карти, показує яка швидкість у обраному населеному пункту (у мегібатах в секунду).
+			</p>
+		</div>
+	</div>
+	<div class="row row2">
+		<div class="col-8 map-container">
 			<div id="map"></div>
 		</div>
-		<div class="col-4">
-			<div class="title"><p>
-				<h3>Рейтинг швидкості інтернету </h3>
-				<div class="cityName"></div>
-			</p></div>
+		<div class="col-4 chart">
+			<div class="cityName"></div>
 			<div id="histo">
 				<div class="tableRow" id="household_int_speed">
 				</div>
@@ -73,11 +80,6 @@
 	</div>
 </div>
 
-<div class="donut">
-
-</div>
-
-
 
 <style>
 
@@ -86,9 +88,23 @@
 		background-color: #fbf8f3;
 	}
 
+	div.leaflet-gl-layer.mapboxgl-map {
+		pointer-events: none;
+	}
 
-	.col-8 {
+
+	.map-container {
 		padding: 10vh !important;
+	}
+
+	.title {
+		padding-left: 10vh;
+		padding-top: 1em;
+		font-size: 2em;
+	}
+
+	.title p {
+		font-size: 0.5em;
 	}
 
 	.cell {
@@ -100,29 +116,41 @@
 		margin-bottom: 0.5em;
 	}
 
-	.col-4 {
-		padding-top: 6vh;
+	.chart {
+		padding-top: 10vh;
 		display: table;
 	}
 
 
-	.container-fluid {
-		height: 100vh;
-	}
+	/*.container-fluid {*/
+		/*height: 100vh;*/
+	/*}*/
 
-	.row {
-		height: 100%;
-	}
+	/*.row {*/
+		/*height: 100%;*/
+	/*}*/
 
 	div#map {
 		height: 100%;
 		width: 100%;
 	}
 
-	div#histo {
-		height: 100%;
-		width: 100%;
+	div.page1 {
+		height: 100vh;
 	}
+
+	.row1 {
+		height: 6em;
+	}
+
+	.row2 {
+		height: calc(100% - 6em);
+	}
+
+	/*div#histo {*/
+		/*height: 100%;*/
+		/*width: 100%;*/
+	/*}*/
 
 	.pixi-popup {padding-bottom: 34px;}
 	.path.right {
@@ -144,7 +172,6 @@
 	.bars {
 		margin-bottom: 1em;
 		height: 50px;
-		/*width: 250px;*/
 	}
 
 	.xAxis {
@@ -164,16 +191,10 @@
 	}
 
 	div.tableRow p {
-		padding-bottom: 1em;
+		padding-bottom: 0.5em;
 		text-align: left;
 		font-weight: bold;
 	}
-
-	div.leaflet-gl-layer.mapboxgl-map {
-		pointer-events: none;
-	}
-
-
 
 
 
