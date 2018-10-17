@@ -14,6 +14,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
@@ -40,12 +41,12 @@
 
 <div class="container-fluid page1">
 	<div class="row row1">
-		<div class="col-12 col-md-8 col-lg-6 title">
+		<div class="col-12 col-md-8 col-lg-8 title">
 			<h3>Рейтинг швидкості інтернету </h3>
 			<p>
 				Дивіться на карту, щоб дізнатися яка швидкість інтернету у різних містах України.
-				Чим насиченіший червоний колір у міста, тим вища швидкість.
-				Графік з правого боку від карти, показує яка швидкість у обраному населеному пункту (у мегібатах в секунду).
+				Чим насиченіший червоний колір, тим вища швидкість у місті.
+				На графіку з правого боку від карти, можна порівняти обране місто з сусідніми.
 			</p>
 		</div>
 	</div>
@@ -56,9 +57,10 @@
 		<div class="col-4 chart">
 			<div class="cityName"></div>
 			<div id="histo">
-				<div class="tableRow" id="household_int_speed">
+				<div class="tableRow first" id="household_int_speed">
 				</div>
 				<div class="tableRow" id="household_int_speed_second"></div>
+
 
 				<div class="tableRow" id="munic_int_speed">
 				</div>
@@ -84,6 +86,11 @@
 <style>
 
 
+	html {
+		font-family: 'Open Sans', sans-serif;
+
+	}
+
 	body {
 		background-color: #fbf8f3;
 	}
@@ -94,7 +101,9 @@
 
 
 	.map-container {
-		padding: 10vh !important;
+		padding-bottom: 10vh;
+		padding-left: 10vh;
+		padding-right: 10vh;
 	}
 
 	.title {
@@ -107,6 +116,10 @@
 		font-size: 0.5em;
 	}
 
+	div.title {
+		padding-top: 0.5em;
+	}
+
 	.cell {
 		display: table-cell;
 	}
@@ -117,7 +130,7 @@
 	}
 
 	.chart {
-		padding-top: 10vh;
+		/*padding-top: 10vh;*/
 		display: table;
 	}
 
@@ -141,10 +154,12 @@
 
 	.row1 {
 		height: 6em;
+		/*padding-top: 2vh;*/
 	}
 
 	.row2 {
 		height: calc(100% - 6em);
+		padding-top: 8vh;
 	}
 
 	/*div#histo {*/

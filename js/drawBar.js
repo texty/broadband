@@ -159,8 +159,6 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
-
     if (selectedSpeed != undefined) {
         ticksToAdd.push('' + selectedSpeed, '' + max);
     }
@@ -181,7 +179,6 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
         .attr("class", "x-zero axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xZeroAxis);
-
 
 
     // Потрібно переписати так, щоб малювало один раз для однієї швидкості і шукало співпадіння по швидкості
