@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 .domain([totalMinSpeed + 0.1, totalMaxSpeed])
                 .range([0, 1]);
 
-            var speedColorScale = d3.interpolateReds;
+            var speedColorScale = d3.interpolatePuBu;
 
             function rgb2hex(rgb){
                 rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     bbox.getNorthEast(),
                                     bbox.getNorthWest(),
                                     bbox.getSouthWest()
-                                ])//.addTo(map);
+                                ]);
                                 map.fitBounds(poly.getBounds());
                             })
                             .addTo(map);
@@ -567,11 +567,106 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
 
 
-                            var margin = {top: 0, right: 20, bottom: 0, left: 20},
-                                width = 300 - margin.left - margin.right,
-                                height = 20 - margin.top - margin.bottom;
+                            var margin = {top: 10, right: 90, bottom: 50, left: 70},
+                                width = 450 - margin.left - margin.right,
+                                height = 95 - margin.top - margin.bottom;
 
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'household_int_speed');
+
+
+                            var swoopy = swoopyArrow()
+                                .angle(Math.PI/2)
+                                .x(function(d) { return d[0]; })
+                                .y(function(d) { return d[1]; });
+
+                            var tipsG = d3.select('div.tableRow.first svg').append("g")
+                                .attr("class" ,"swoopy-tooltip")
+                                .attr("transform", "translate(" + 10 + "," + -10 + ")");
+
+                            tipsG.append("text")
+                                .attr('y', 25)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('Мінімальна');
+
+
+                            tipsG.append("text")
+                                .attr('y', 35)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('швидкість');
+
+                            tipsG.append("text")
+                                .attr('y', 45)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('інтернету');
+
+
+                            tipsG.append("text")
+                                .attr('y', 55)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('по Україні');
+
+
+                            tipsG.append("path")
+                                .attr('marker-end', 'url(#arrowhead)')
+                                .datum([[40, 85],[20, 65]])
+                                .attr("d", swoopy);
+
+                            d3.select('div.tableRow.first svg').append('g').html('<marker id="arrowhead" viewBox="-10 -10 20 20" refX="0" refY="0" markerWidth="10" markerHeight="10" stroke-width="1" orient="auto"><polyline stroke-linejoin="bevel" points="-6.75,-6.75 0,0 -6.75,6.75"></polyline></marker>')
+
+
+                            var swoopy2 = swoopyArrow()
+                                .angle(Math.PI/2)
+                                .clockwise(false)
+                                .x(function(d) { return d[0]; })
+                                .y(function(d) { return d[1]; });
+
+                            var tipsB = d3.select('div.tableRow.first svg').append("g")
+                                .attr("class" ,"swoopy-tooltip")
+                                .attr("transform", "translate(" + 390 + "," + -10 + ")");
+
+                            tipsB.append("text")
+                                .attr('y', 25)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('Максимальна');
+
+
+                            tipsB.append("text")
+                                .attr('y', 35)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('швидкість');
+
+                            tipsB.append("text")
+                                .attr('y', 45)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('інтернету');
+
+
+                            tipsB.append("text")
+                                .attr('y', 55)
+                                .attr('x', 35)
+                                .attr('text-anchor', "end")
+                                .text('по Україні');
+
+
+                            tipsB.append("path")
+                                .attr('marker-end', 'url(#arrowhead)')
+                                .datum([[0, 80],[20, 60]])
+                                // .datum([[0, 80],[20, 60]])
+                                .attr("d", swoopy2);
+
+
+                            margin = {top: 5, right: 90, bottom: 10, left: 70},
+                                width = 410 - margin.left - margin.right,
+                                height = 40 - margin.top - margin.bottom;
+
+
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'edu_int_speed');
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'health_int_speed');
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'culture_int_speed');
@@ -611,7 +706,7 @@ document.addEventListener("DOMContentLoaded", function() {
             accessToken: 'pk.eyJ1IjoiZHJpbWFjdXMxODIiLCJhIjoiWGQ5TFJuayJ9.6sQHpjf_UDLXtEsz8MnjXw',
             maxZoom: 19,
             // style: 'data/internet.json',
-            style: 'data/labels.json',
+            style: 'data/positron.json',
             pane: 'overlayPane'
         }).addTo(map);
 

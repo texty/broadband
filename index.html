@@ -23,6 +23,9 @@
 	<script src="L.PixiOverlay.js"></script>
 	<script src="lodash.js"></script>
 	<script src="rbush.js"></script>
+	<script src="js/swoopyArrows.js"></script>
+
+
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
@@ -51,15 +54,15 @@
 		</div>
 	</div>
 	<div class="row row2">
-		<div class="col-8 map-container">
+		<div class="col-7 map-container">
 			<div id="map"></div>
 		</div>
-		<div class="col-4 chart">
+		<div class="col-5 chart">
 			<div class="cityName"></div>
 			<div id="histo">
-				<div class="tableRow first" id="household_int_speed">
+				<div class="tableRow" id="household_int_speed">
 				</div>
-				<div class="tableRow" id="household_int_speed_second"></div>
+				<div class="tableRow first" id="household_int_speed_second"></div>
 
 
 				<div class="tableRow" id="munic_int_speed">
@@ -99,11 +102,15 @@
 		pointer-events: none;
 	}
 
+	p.cell {
+		padding-left: 70px;
+	}
+
 
 	.map-container {
 		padding-bottom: 10vh;
 		padding-left: 10vh;
-		padding-right: 10vh;
+		/*padding-right: 10vh;*/
 	}
 
 	.title {
@@ -126,7 +133,7 @@
 
 	.tableRow {
 		display: table-row;
-		margin-bottom: 0.5em;
+		/*margin-bottom: 0.5em;*/
 	}
 
 	.chart {
@@ -178,16 +185,16 @@
 		fill-opacity: 0.6;
 	}
 	.bar {
-		margin-bottom: 1em;
+		/*margin-bottom: 1em;*/
 		fill: #d3d3d3;
 		opacity: 0.6;
 		z-index: 0.6;
 	}
 
-	.bars {
-		margin-bottom: 1em;
-		height: 50px;
-	}
+	/*.bars {*/
+		/*margin-bottom: 1em;*/
+		/*!*height: 50px;*!*/
+	/*}*/
 
 	.xAxis {
 		overflow: visible;
@@ -209,6 +216,15 @@
 		padding-bottom: 0.5em;
 		text-align: left;
 		font-weight: bold;
+	}
+
+	g.swoopy-tooltip text {
+		font-size: 0.5em;
+	}
+
+	g.swoopy-tooltip path {
+		fill: none;
+		stroke: black;
 	}
 
 

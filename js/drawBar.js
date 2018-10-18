@@ -5,7 +5,6 @@
 function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     var ticksToAdd = [];
-    
 
     var namesDict = {'munic_int_speed': 'органи влади',
         'edu_int_speed': 'заклади освіти',
@@ -140,7 +139,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
             namesDict[intUserName]
             // Math.round(percent) + "%"
         );
-    
+    //
     
     
     //
@@ -156,6 +155,8 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
         .attr("height", height + margin.top + margin.bottom)
         .attr('class', 'bars');
 
+
+
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -170,14 +171,15 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     var xZeroAxis = d3.axisBottom(scaleZero);
 
+
     g.append("g")
         .attr("class", "xAxis")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + 40 + ")")
         .call(xAxis); // Create an axis component with d3.axisBottom
 
     g.append("g")
         .attr("class", "x-zero axis")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + 40 + ")")
         .call(xZeroAxis);
 
 
@@ -186,23 +188,61 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
         .data(dataForChart)
         .enter().append("rect")
         .attr('id', function (d) {
-                return "id" + d + "_" + intUserName;
+            return "id" + d + "_" + intUserName;
         })
         .attr("class", function (d) {
-                return "bar"
+            return "bar"
         })
         .attr("x", function (d) {
-                return logScale(+d + 1);
+            return logScale(+d + 1);
         })
         .attr("y", 0)
         .attr("width", 1)
         .attr("height", function (d) {
-                return height;
+            return 30;
         });
 
-
-
     changeClass(selectedKOATUU);
+    
+    if (intUserName == 'household_int_speed' && selectedSpeed != null) {
+        var swoopy2 = swoopyArrow()
+            .angle(Math.PI/2)
+            .clockwise(false)
+            .x(function(d) { return d[0]; })
+            .y(function(d) { return d[1]; });
+
+        var selectedPosition = margin.left + logScale(+selectedSpeed + 0.1);
+
+        var tipsB = d3.select('div.tableRow.first svg').append("g")
+            .attr("class" ,"swoopy-tooltip")
+            .attr("transform", "translate(" + selectedPosition + "," + 30 + ")");
+
+
+        tipsB.append("text")
+            .attr('y', 60)
+            .attr('x', 70)
+            .attr('text-anchor', "end")
+            .text('Обране місто');
+
+        // tipsB.append("text")
+        //     .attr('y', 70)
+        //     .attr('x', 70)
+        //     .attr('text-anchor', "end")
+        //     .text('в обраному');
+        //
+        //
+        // tipsB.append("text")
+        //     .attr('y', 80)
+        //     .attr('x', 70)
+        //     .attr('text-anchor', "end")
+        //     .text('місті');
+
+
+        tipsB.append("path")
+            .attr('marker-end', 'url(#arrowhead)')
+            .datum([[0, 50],[15, 60]])
+            .attr("d", swoopy2);
+    }
 
 
 
@@ -211,34 +251,34 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
             if (selectedKOATUU.length == 1) {
                 d3.selectAll("#id" + Math.round(selectedKOATUU[0][intUserName]) + "_" + intUserName)
                     .style('height', function (d) {
-                        return height + 10
+                        return 40
                     })
                     .style('width', function (d) {
                         return 2
                     })
                     .style('fill', function (d) {
-                        return "red"
+                        return '#1a5280'
                     })
                     .attr('y', function (d) {
                         return -5
                     })
             }
-            else {
-                d3.selectAll('.bar')
-                    .style('height', function (d) {
-                        return height + 10
-                    })
-
-                    .style('width', function (d) {
-                        return 2
-                    })
-                    .style('fill', function (d) {
-                        return "blue"
-                    })
-                    .attr('y', function (d) {
-                        return -5
-                    })
-            }
+            // else {
+            //     d3.selectAll('.bar')
+            //         .style('height', function (d) {
+            //             return height + 10
+            //         })
+            //
+            //         .style('width', function (d) {
+            //             return 2
+            //         })
+            //         .style('fill', function (d) {
+            //             return "blue"
+            //         })
+            //         .attr('y', function (d) {
+            //             return -5
+            //         })
+            // }
         }
     }
 
