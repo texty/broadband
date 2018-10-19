@@ -342,9 +342,17 @@ document.addEventListener("DOMContentLoaded", function() {
                         // Here I draw polygons
                         markers.features.forEach(function (projectedPolygon) {
 
+
+
                             var color, alpha;
                             if (projectedPolygon.properties.internetInfo.length == 1) {
-                                // triangle.lineStyle(3 / scale, 0xffffff, 1);
+                                if (projectedPolygon.properties.internetInfo[0].optical_fiber_connection == 'Так') {
+                                    triangle.lineStyle(0.5 / scale, 0x4ae002, 1);
+                                }
+                                else {
+                                    triangle.lineStyle(0.5 / scale, 0x4ae002, 0);
+                                }
+
                                 // alpha = 0.6;
 
                                 var speedNumber = +projectedPolygon.properties.internetInfo[0].household_int_speed;
@@ -359,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                             }
                             else {
-                                // triangle.lineStyle(3 / scale, 0xffffff, 1);
+                                triangle.lineStyle(0.5 / scale, 0x4ae002, 0);
                                 color = 0xd3d3d3;
                                 alpha = 0.6;
                             }
@@ -557,7 +565,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                             if (selectedCity != null) {
                                 d3.selectAll('#histo .tableRow *').remove();
-                                d3.select('div.cityName').remove();
+                                // d3.select('div.cityName').remove();
                                 selectedCityData = selectedCity[0].feature.internetInfo;
                             }
                             else {
@@ -664,7 +672,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                             margin = {top: 5, right: 90, bottom: 10, left: 70},
                                 width = 410 - margin.left - margin.right,
-                                height = 40 - margin.top - margin.bottom;
+                                height = 70 - margin.top - margin.bottom;
 
 
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'edu_int_speed');
@@ -672,9 +680,19 @@ document.addEventListener("DOMContentLoaded", function() {
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'culture_int_speed');
                             makeChart(boundCitiesData, margin, width, height, selectedCityData, 'munic_int_speed');
 
-                            // d3.select('div.cityName').append("p").text(
-                            //     selectedCityData == undefined ? "Оберіть місто" : selectedCityData[0].ato_name
-                            // );
+                            d3.select('div.cityName p').text(
+                                selectedCityData == undefined ? "Оберіть місто" : selectedCityData[0].ato_name
+                            );
+
+
+
+                            if (selectedCityData != undefined && selectedCityData[0].optical_fiber_connection == 'Так') {
+                                d3.select('div.cityName button.btn').style('opacity', 1);
+                            }
+                            else {
+                                d3.select('div.cityName button.btn').style('opacity', 0);
+                            }
+
 
 
                         }

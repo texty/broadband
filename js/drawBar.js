@@ -174,12 +174,12 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 
     g.append("g")
         .attr("class", "xAxis")
-        .attr("transform", "translate(0," + 40 + ")")
+        .attr("transform", "translate(0," + 20 + ")")
         .call(xAxis); // Create an axis component with d3.axisBottom
 
     g.append("g")
         .attr("class", "x-zero axis")
-        .attr("transform", "translate(0," + 40 + ")")
+        .attr("transform", "translate(0," + 20 + ")")
         .call(xZeroAxis);
 
 
@@ -199,7 +199,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
         .attr("y", 0)
         .attr("width", 1)
         .attr("height", function (d) {
-            return 30;
+            return 20;
         });
 
     changeClass(selectedKOATUU);
@@ -251,7 +251,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
             if (selectedKOATUU.length == 1) {
                 d3.selectAll("#id" + Math.round(selectedKOATUU[0][intUserName]) + "_" + intUserName)
                     .style('height', function (d) {
-                        return 40
+                        return 30
                     })
                     .style('width', function (d) {
                         return 2

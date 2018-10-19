@@ -32,8 +32,6 @@
 	<script src="https://unpkg.com/flatbush@3.1.0/flatbush.min.js"></script>
 
 
-
-	<!--<script src="js/barCodeChart.js"></script>-->
 	<script src="js/drawBar.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/smallChart.js"></script>
@@ -44,13 +42,21 @@
 
 <div class="container-fluid page1">
 	<div class="row row1">
-		<div class="col-12 col-md-8 col-lg-8 title">
-			<h3>Рейтинг швидкості інтернету </h3>
+		<div class="col-12 col-md-7 col-lg-7 title">
+			<h3>Карта доступу до інтернету </h3>
 			<p>
-				Дивіться на карту, щоб дізнатися яка швидкість інтернету у різних містах України.
-				Чим насиченіший червоний колір, тим вища швидкість у місті.
-				На графіку з правого боку від карти, можна порівняти обране місто з сусідніми.
+				Дивіться на карту, щоб дізнатися якими є швидкість та технології доступу до інтернету у різних містах України.
+				У містах, що обведені зеленою лінією, доступ до інтернету забезпечує оптоволокно.
+				На графіку з правого боку від карти, можна порівняти швидкість обраного у місті з сусідніми.
 			</p>
+		</div>
+		<div class="col-12 col-md-5 col-lg-5 title">
+			<div class="cityName">
+				<div class="row cityName">
+						<p></p>
+						<button class="btn">Є оптоволокно</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row row2">
@@ -58,7 +64,7 @@
 			<div id="map"></div>
 		</div>
 		<div class="col-5 chart">
-			<div class="cityName"></div>
+			<!--<div class="cityName"></div>-->
 			<div id="histo">
 				<div class="tableRow" id="household_int_speed">
 				</div>
@@ -226,6 +232,48 @@
 		fill: none;
 		stroke: black;
 	}
+
+
+	.btn {
+		pointer-events: none;
+		opacity: 0;
+		border: none;
+		background-color: transparent;
+		/*padding: 12px 16px;*/
+		font-size: 0.5em;
+		/*cursor: pointer;*/
+	}
+
+	.btn:before {
+		content: url(checked.svg);
+		width: 20px;
+		float: left;
+		margin-right: 5px;
+		/*margin-top: -2px;*/
+	}
+
+	div.cityName {
+		padding-top: 25px;
+	}
+
+	div.cityName p {
+		margin-top: 1em;
+	}
+
+	div.row.cityName p{
+		background-color: black;
+		color: white;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
+	div.row.cityName button {
+		color: #4ae002;
+		font-weight: bold;
+		padding: 1em;
+	}
+
+
 
 
 
