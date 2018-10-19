@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 var zoom = utils.getMap().getZoom();
                 var triangle = utils.getContainer();
+                var circle = new PIXI.Graphics();
                 var renderer = utils.getRenderer();
                 var project = utils.latLngToLayerPoint;
                 var scale = utils.getScale();
@@ -339,19 +340,21 @@ document.addEventListener("DOMContentLoaded", function() {
                         totalData = null;
 
 
+                        // triangle.addChild(circle);
+
+
                         // Here I draw polygons
                         markers.features.forEach(function (projectedPolygon) {
 
 
-
                             var color, alpha;
                             if (projectedPolygon.properties.internetInfo.length == 1) {
-                                if (projectedPolygon.properties.internetInfo[0].optical_fiber_connection == 'Так') {
-                                    triangle.lineStyle(0.5 / scale, 0x4ae002, 1);
-                                }
-                                else {
-                                    triangle.lineStyle(0.5 / scale, 0x4ae002, 0);
-                                }
+                                // if (projectedPolygon.properties.internetInfo[0].optical_fiber_connection == 'Так') {
+                                //     triangle.lineStyle(0.5 / scale, 0x4ae002, 1);
+                                // }
+                                // else {
+                                //     triangle.lineStyle(0.5 / scale, 0x4ae002, 0);
+                                // }
 
                                 // alpha = 0.6;
 
@@ -367,9 +370,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                             }
                             else {
-                                triangle.lineStyle(0.5 / scale, 0x4ae002, 0);
+                                // triangle.lineStyle(0.5 / scale, 0x4ae002, 0);
                                 color = 0xd3d3d3;
-                                alpha = 0.6;
+                                alpha = 0.3;
                             }
 
 
@@ -381,7 +384,95 @@ document.addEventListener("DOMContentLoaded", function() {
                                     if (index == 0) triangle.moveTo(coords.x, coords.y);
                                     else triangle.lineTo(coords.x, coords.y);
                                 });
+
                                 triangle.endFill();
+
+                                // var boundPolygon = L.bounds(projectedPolygon.geometry.coordinates[0][0].map(function(d) {return [d.x,d.y]}));
+                                // var center = [boundPolygon.max.x + boundPolygon.min.x/2,boundPolygon.max.y + boundPolygon.min.y/2];
+                                // var radius = Math.hypot(boundPolygon.max.x - boundPolygon.max.x, boundPolygon.max.y - boundPolygon.max.y)/2;
+
+
+                                (function () {
+                                    "use strict";
+
+                                    function Point(x, y) {
+                                        this.x = x;
+                                        this.y = y;
+                                    }
+
+                                    function Region(points) {
+                                        this.points = points || [];
+                                        this.length = points.length;
+                                    }
+
+                                    Region.prototype.area = function () {
+                                        var area = 0,
+                                            i,
+                                            j,
+                                            point1,
+                                            point2;
+
+                                        for (i = 0, j = this.length - 1; i < this.length; j=i,i++) {
+                                            point1 = this.points[i];
+                                            point2 = this.points[j];
+                                            area += point1.x * point2.y;
+                                            area -= point1.y * point2.x;
+                                        }
+                                        area /= 2;
+
+                                        return area;
+                                    };
+
+                                    Region.prototype.centroid = function () {
+                                        var x = 0,
+                                            y = 0,
+                                            i,
+                                            j,
+                                            f,
+                                            point1,
+                                            point2;
+
+                                        for (i = 0, j = this.length - 1; i < this.length; j=i,i++) {
+                                            point1 = this.points[i];
+                                            point2 = this.points[j];
+                                            f = point1.x * point2.y - point2.x * point1.y;
+                                            x += (point1.x + point2.x) * f;
+                                            y += (point1.y + point2.y) * f;
+                                        }
+
+                                        f = this.area() * 6;
+
+                                        return new Point(x / f, y / f);
+                                    };
+
+
+                                    // console.log(region.centroid());
+
+                                    var boundPolygon = L.bounds(projectedPolygon.geometry.coordinates[0][0].map(function(d) {return [d.x,d.y]}));
+                                    // var center = [boundPolygon.max.x + boundPolygon.min.x/2,boundPolygon.max.y + boundPolygon.min.y/2];
+                                    var radius = Math.hypot(boundPolygon.max.x - boundPolygon.min.x, boundPolygon.max.y - boundPolygon.min.y) * scale;
+
+                                    var region = new Region(projectedPolygon.geometry.coordinates[0][0]);
+
+                                    var center = region.centroid();
+
+                                    if (projectedPolygon.properties.internetInfo.length == 1 && projectedPolygon.properties.internetInfo[0].optical_fiber_connection == 'Так') {
+                                        triangle.beginFill(0xff00ff, 1);
+                                        // var center = {x: 108126.21000304745, y: 61788.73347298092};
+                                        triangle.drawCircle(center.x, center.y, 2);
+                                        triangle.endFill();
+                                        }
+
+                                }());
+
+
+                                // triangle.beginFill(0xff3232, 1);
+                                // // var center = {x: 108126.21000304745, y: 61788.73347298092};
+                                // triangle.drawCircle(center[0], center[1], 20);
+                                // triangle.endFill();
+                                //
+                                // triangle.addChild(circle)
+
 
                             }
                             else {
@@ -709,7 +800,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 firstDraw = false;
                 prevZoom = zoom;
 
+
+                window.triangle = triangle;
                 renderer.render(triangle);
+                // renderer.render(circle);
 
 
             }, pixiContainer, {
