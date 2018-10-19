@@ -83,7 +83,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
 //
     var logScale = d3.scaleLog()
         .domain([1, max])
-        .range([0, width]);
+        .range([1, width]);
 
     var scaleZero = d3.scaleOrdinal()
         .domain([0])
@@ -211,7 +211,7 @@ function makeChart(data, margin, width, height, selectedKOATUU, intUserName) {
             .x(function(d) { return d[0]; })
             .y(function(d) { return d[1]; });
 
-        var selectedPosition = margin.left + logScale(+selectedSpeed + 0.1);
+        var selectedPosition = margin.left + logScale(+selectedSpeed + + 0.999999999);
 
         var tipsB = d3.select('div.tableRow.first svg').append("g")
             .attr("class" ,"swoopy-tooltip")
