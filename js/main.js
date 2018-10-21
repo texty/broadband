@@ -277,12 +277,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
             var geojsonLayer = L.geoJson(geojsonMarkers, {
                 style: {
-                    "color": "#ff7800",
-                    "weight": 5,
+                    "color": "#ff00ff ",
+                    "weight": 3,
                     "opacity": 0.65
                 },
                 pointToLayer: function (feature, latlng) {
-                    return new L.CircleMarker(latlng, {radius: 4, fillOpacity: 0.5});
+                    return new L.CircleMarker(latlng, {radius: 2, fillOpacity: 0.5});
                 }
             });
 
