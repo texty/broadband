@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             var geojsonLayer = L.geoJson(geojsonMarkers, {
                 style: {
-                    "color": "#ff00ff ",
+                    "color": "#ff6e00",
                     "weight": 3,
                     "opacity": 0.65
                 },
